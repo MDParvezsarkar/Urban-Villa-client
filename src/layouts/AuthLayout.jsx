@@ -1,0 +1,34 @@
+import React from 'react';
+import { Outlet } from 'react-router';
+import Logo from '../Pages/Shared/Logo/Logo';
+
+const AuthLayout = () => {
+    return (
+      <div className="min-h-screen flex flex-col md:flex-row bg-base-100">
+        {/* Left Side - Logo + Image or Lottie */}
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-primary text-primary-content p-6 space-y-6">
+          {/* Logo at top */}
+          <div className="w-full flex justify-start">
+            <Logo />
+          </div>
+
+          {/* Main content - centered */}
+          <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
+            <h1 className="text-3xl font-bold">Welcome Back!</h1>
+            <p className="mt-2">
+              Here you can show an image or a Lottie animation
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side - Login Component */}
+        <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+          <div className="w-full max-w-md">
+            <Outlet />
+          </div>
+        </div>
+      </div>
+    );
+};
+
+export default AuthLayout;
