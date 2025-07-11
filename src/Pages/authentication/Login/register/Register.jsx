@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
 import useAuth from "../../../../hooks/useAuth";
+import axios from "axios";
+import useAxios from "../../../../hooks/useAxios";
+import { Link } from "react-router";
 import SocialLogin from "../../SocialLogin/SocialLogin";
-
 
 const Register = () => {
   const {
@@ -11,137 +12,132 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createUser, updateUserProfile } = useAuth();
+  const axiosInstance = useAxios();
+  const [uploading, setUploading] = useState(false);
 
-  
-const { createUser } = useAuth();
+  const [profilePic, setProfilePic] = useState("");
 
-const onSubmit = (data) => {
-  createUser(data.email, data.password)
-    .then((result) => {
-      console.log("Registered User:", result.user);
-      // Optionally update profile, toast here
-    })
-    .catch((error) => {
-      console.error("Registration Error:", error.message);
-    });
-};
+  const handleImageUpload = async (e) => {
+    setUploading(true);
+    const image = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const uploadURL = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_image_upload_key
+    }`;
+    try {
+      const res = await axios.post(uploadURL, formData);
+      setProfilePic(res.data.data.url);
+    } catch (err) {
+      console.error("Image upload failed", err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      const result = await createUser(data.email, data.password);
+      const firebaseUser = result.user;
+      console.log(firebaseUser)
+
+      // Update Firebase profile
+      await updateUserProfile({
+        displayName: `${data.firstName} ${data.lastName}`,
+        photoURL: profilePic,
+      });
+
+      // Send user to backend
+      const userInfo = {
+        email: data.email,
+        name: `${data.firstName} ${data.lastName}`,
+        role: "user",
+        photoURL: profilePic,
+        created_at: new Date().toISOString(),
+        last_log_in: new Date().toISOString(),
+      };
+
+      const res = await axiosInstance.post("/users", userInfo);
+      console.log("User saved to DB", res.data);
+    } catch (error) {
+      console.error("Register Error", error);
+    }
+  };
 
   return (
     <div className="card shadow-xl bg-base-200 p-6">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="card bg-base-200 p-6 space-y-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <h2 className="text-2xl font-bold text-center">Create Account</h2>
 
-        {/* First Name */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text font-semibold">First Name</span>
-          </label>
-          <input
-            type="text"
-            placeholder="John"
-            {...register("firstName", {
-              required: "First name is required",
-              maxLength: {
-                value: 20,
-                message: "Max length is 20 characters",
-              },
-            })}
-            className="input input-bordered w-full"
-          />
-          {errors.firstName && (
-            <span className="text-error text-sm mt-1">
-              {errors.firstName.message}
-            </span>
-          )}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="label">First Name</label>
+            <input
+              {...register("firstName", { required: "Required" })}
+              className="input input-bordered w-full"
+            />
+            {errors.firstName && (
+              <p className="text-red-500">{errors.firstName.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label">Last Name</label>
+            <input
+              {...register("lastName")}
+              className="input input-bordered w-full"
+            />
+          </div>
         </div>
 
-        {/* Last Name */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text font-semibold">Last Name</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Doe"
-            {...register("lastName", {
-              pattern: {
-                value: /^[A-Za-z]+$/i,
-                message: "Only letters allowed",
-              },
-            })}
-            className="input input-bordered w-full"
-          />
-          {errors.lastName && (
-            <span className="text-error text-sm mt-1">
-              {errors.lastName.message}
-            </span>
-          )}
-        </div>
-
-        {/* Email */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text font-semibold">Email</span>
-          </label>
+        <div>
+          <label className="label">Email</label>
           <input
             type="email"
-            placeholder="you@example.com"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: "Invalid email format",
-              },
-            })}
+            {...register("email", { required: "Required" })}
             className="input input-bordered w-full"
           />
           {errors.email && (
-            <span className="text-error text-sm mt-1">
-              {errors.email.message}
-            </span>
+            <p className="text-red-500">{errors.email.message}</p>
           )}
         </div>
 
-        {/* Password */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text font-semibold">Password</span>
-          </label>
+        <div>
+          <label className="label">Password</label>
           <input
             type="password"
-            placeholder="••••••••"
             {...register("password", {
-              required: "Password is required",
+              required: "Required",
               minLength: {
                 value: 6,
-                message: "Minimum 6 characters",
-              },
-              pattern: {
-                value:
-                  /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-                message:
-                  "Must include uppercase, lowercase, number, and special character",
+                message: "Min 6 characters",
               },
             })}
             className="input input-bordered w-full"
           />
           {errors.password && (
-            <span className="text-error text-sm mt-1">
-              {errors.password.message}
-            </span>
+            <p className="text-red-500">{errors.password.message}</p>
           )}
         </div>
 
-        {/* Submit Button */}
-        <button type="submit" className="btn btn-primary w-full mt-2">
-          Create Account
-        </button>
-          <SocialLogin />
+        <div>
+          <label className="label">Profile Image</label>
+          <input
+            type="file"
+            onChange={handleImageUpload}
+            className="file-input file-input-bordered w-full"
+          />
+          {uploading && <p className="text-blue-500">Uploading...</p>}
+        </div>
 
-        {/* Login Link */}
+        <button type="submit" className="btn btn-primary w-full mt-2">
+          Register
+        </button>
+
+        <SocialLogin />
+
         <p className="text-sm text-center mt-4">
           Already have an account?{" "}
           <Link

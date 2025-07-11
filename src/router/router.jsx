@@ -6,6 +6,10 @@ import Login from "../Pages/authentication/Login/Login";
 import Register from "../Pages/authentication/Login/register/Register";
 import Apartments from "../Pages/Apartments/Apartments";
 import Error404 from "../Pages/ErrorPage/Error404";
+import PrivateRoute from "../components/routes/PrivateRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Profile from "../Pages/dashboard/Profile";
+import Announcements from "../Pages/dashboard/Announcements";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +26,18 @@ export const router = createBrowserRouter([
     children: [
       { path: "login", Component: Login },
       { path: "register", Component: Register },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      { path: "profile", element: <Profile /> },
+      { path: "announcements", element: <Announcements /> },
     ],
   },
   {

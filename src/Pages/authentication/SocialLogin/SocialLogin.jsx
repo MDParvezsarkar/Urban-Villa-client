@@ -1,21 +1,45 @@
 import { useNavigate, useLocation } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
-import { useLoading } from "../../../hooks/useLoading"; 
+import { useLoading } from "../../../hooks/useLoading";
 import "react-toastify/dist/ReactToastify.css";
 import { FcGoogle } from "react-icons/fc";
+import useAxios from "../../../hooks/useAxios";
+
 const SocialLogin = () => {
   const { signInWithGoogle } = useAuth();
-  const { setLoading } = useLoading(); 
+  const { setLoading } = useLoading();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const axiosInstance = useAxios();
 
   const handleGoogleLogin = () => {
-    setLoading(true); 
+    setLoading(true);
     signInWithGoogle()
-      .then((result) => {
-        console.log("Google Login Success:", result.user);
+      .then(async (result) => {
+        const user = result.user;
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          role: "user",
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+
+        // Check if user exists before insert
+        try {
+          const res = await axiosInstance.post("/users", userInfo);
+          if (res.data.insertedId) {
+            console.log("✅ New user added from Google login");
+          } else {
+            console.log("ℹ️ Existing user, no new insert");
+          }
+        } catch (err) {
+          console.error("Error saving Google user to DB:", err);
+        }
+
         toast.success("Logged in with Google!");
         navigate(from, { replace: true });
       })
@@ -23,8 +47,9 @@ const SocialLogin = () => {
         console.error("Google Login Failed:", error.message);
         toast.error("Google login failed!");
       })
-      .finally(() => setLoading(false)); 
+      .finally(() => setLoading(false));
   };
+
 
   return (
     <div>

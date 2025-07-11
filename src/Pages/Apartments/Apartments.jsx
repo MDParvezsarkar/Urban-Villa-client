@@ -35,32 +35,41 @@ const Apartments = () => {
     );
 
   // ✅ Agreement Handler
-  const handleAgreement = (apartment) => {
-    if (!user) {
-      toast.warn("Please login first!");
-      navigate("/login");
-      return;
-    }
+ const handleAgreement = (apartment) => {
+   if (!user) {
+     toast.warn("Please login first!");
+     navigate("/login");
+     return;
+   }
 
-    const agreementData = {
-      userName: user.displayName,
-      userEmail: user.email,
-      floor: apartment.floor,
-      block: apartment.block,
-      apartmentNo: apartment.apartmentNo,
-      rent: apartment.rent,
-      status: "pending",
-    };
+   const agreementData = {
+     userName: user.displayName,
+     userEmail: user.email,
+     floor: apartment.floor,
+     block: apartment.block,
+     apartmentNo: apartment.apartmentNo,
+     rent: apartment.rent,
+     status: "pending",
+   };
 
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/agreements`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(agreementData),
-    })
-      .then((res) => res.json())
-      .then(() => toast.success("Agreement sent!"))
-      .catch(() => toast.error("Something went wrong"));
-  };
+   fetch(`${import.meta.env.VITE_API_URL}/agreements`, {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify(agreementData),
+   })
+     .then(async (res) => {
+       const data = await res.json();
+
+       if (!res.ok) {
+         toast.error(data.message || "Failed to send agreement");
+         return;
+       }
+
+       toast.success("Agreement sent!");
+     })
+     .catch(() => toast.error("Something went wrong"));
+ };
+
 
   return (
     <div className="p-4">
