@@ -5,6 +5,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../Pages/authentication/Login/Login";
 import Register from "../Pages/authentication/Login/register/Register";
 import Apartments from "../Pages/Apartments/Apartments";
+import Error404 from "../Pages/ErrorPage/Error404";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     Component: RootLayout,
     children: [
       { index: true, Component: Home },
-      { path: "/apertment", Component: Apartments }
+      { path: "/apertment", Component: Apartments },
     ],
   },
   {
@@ -22,5 +23,9 @@ export const router = createBrowserRouter([
       { path: "login", Component: Login },
       { path: "register", Component: Register },
     ],
+  },
+  {
+    path: "*",
+    element: <Error404 />,
   },
 ]);

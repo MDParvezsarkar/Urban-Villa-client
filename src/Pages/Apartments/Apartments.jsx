@@ -1,28 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ApartmentCard from "../../components/Apartments/ApartmentCard";
 import Pagination from "../../components/Apartments/Pagination";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import Loader from "../../Pages/Shared/Loader/Loader"; 
+import useApartments from "../../hooks/useApartments";
+import MoonLoaderComponent from "../Shared/Loader/MoonLoaderComponent";
 
 const Apartments = () => {
-  const [apartments, setApartments] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [minRent, setMinRent] = useState("5000");
+  const [maxRent, setMaxRent] = useState("20000");
+  const [searchParams, setSearchParams] = useState({ min: "", max: "" });
+
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(
-      `https://b11a12-server-side-mdp-arvezsarkar.vercel.app/apartments?page=${page}&limit=6`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setApartments(data.apartments);
-        setTotalPages(data.totalPages);
-      });
-  }, [page]);
+  
+  const { data, isLoading, error } = useApartments(
+    page,
+    searchParams.min,
+    searchParams.max
+  );
 
+
+  const apartments = data?.apartments || [];
+  const totalPages = data?.totalPages || 1;
+
+  if (isLoading) return <MoonLoaderComponent />;
+  if (error)
+    return (
+      <p className="text-red-500 text-center mt-10">❌ Failed to load data</p>
+    );
+
+  // ✅ Agreement Handler
   const handleAgreement = (apartment) => {
     if (!user) {
       toast.warn("Please login first!");
@@ -40,33 +52,49 @@ const Apartments = () => {
       status: "pending",
     };
 
-    fetch("https://b11a12-server-side-mdp-arvezsarkar.vercel.app/agreements", {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/agreements`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(agreementData),
     })
-      .then(async (res) => {
-        if (!res.ok) {
-          const errorData = await res.json();
-          throw new Error(errorData.message || "Something went wrong");
-        }
-        return res.json();
-      })
-      .then(() => {
-        toast.success("Agreement sent!");
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong");
-        console.error(err);
-      });
-    
+      .then((res) => res.json())
+      .then(() => toast.success("Agreement sent!"))
+      .catch(() => toast.error("Something went wrong"));
   };
 
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Available Apartments</h2>
+
+      {/* 🔍 Rent Filter */}
+      <div className="flex flex-col md:flex-row gap-2 mb-4 items-center">
+        <input
+          type="number"
+          placeholder="Min Rent"
+          className="input input-bordered w-full max-w-xs"
+          value={minRent}
+          onChange={(e) => setMinRent(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Max Rent"
+          className="input input-bordered w-full max-w-xs"
+          value={maxRent}
+          onChange={(e) => setMaxRent(e.target.value)}
+        />
+        
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            setPage(1); 
+            setSearchParams({ min: minRent, max: maxRent });
+          }}
+        >
+          Search
+        </button>
+      </div>
+
+      {/* 🏢 Apartment List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {apartments.map((apt) => (
           <ApartmentCard
@@ -76,6 +104,8 @@ const Apartments = () => {
           />
         ))}
       </div>
+
+      {/* 📄 Pagination */}
       <Pagination
         currentPage={page}
         totalPages={totalPages}
