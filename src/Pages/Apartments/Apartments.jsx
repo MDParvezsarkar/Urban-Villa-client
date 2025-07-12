@@ -4,9 +4,9 @@ import Pagination from "../../components/Apartments/Pagination";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import Loader from "../../Pages/Shared/Loader/Loader"; 
 import useApartments from "../../hooks/useApartments";
 import MoonLoaderComponent from "../Shared/Loader/MoonLoaderComponent";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Apartments = () => {
   const [page, setPage] = useState(1);
@@ -16,14 +16,13 @@ const Apartments = () => {
 
   const { user } = useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
-  
   const { data, isLoading, error } = useApartments(
     page,
     searchParams.min,
     searchParams.max
   );
-
 
   const apartments = data?.apartments || [];
   const totalPages = data?.totalPages || 1;
@@ -34,42 +33,33 @@ const Apartments = () => {
       <p className="text-red-500 text-center mt-10">❌ Failed to load data</p>
     );
 
-  // ✅ Agreement Handler
- const handleAgreement = (apartment) => {
-   if (!user) {
-     toast.warn("Please login first!");
-     navigate("/login");
-     return;
-   }
+  // ✅ Secure Agreement Handler with Token
+  const handleAgreement = async (apartment) => {
+    if (!user) {
+      toast.warn("Please login first!");
+      navigate("/login");
+      return;
+    }
 
-   const agreementData = {
-     userName: user.displayName,
-     userEmail: user.email,
-     floor: apartment.floor,
-     block: apartment.block,
-     apartmentNo: apartment.apartmentNo,
-     rent: apartment.rent,
-     status: "pending",
-   };
+    const agreementData = {
+      userName: user.displayName,
+      userEmail: user.email,
+      floor: apartment.floor,
+      block: apartment.block,
+      apartmentNo: apartment.apartmentNo,
+      rent: apartment.rent,
+      status: "pending",
+    };
 
-   fetch(`${import.meta.env.VITE_API_URL}/agreements`, {
-     method: "POST",
-     headers: { "Content-Type": "application/json" },
-     body: JSON.stringify(agreementData),
-   })
-     .then(async (res) => {
-       const data = await res.json();
-
-       if (!res.ok) {
-         toast.error(data.message || "Failed to send agreement");
-         return;
-       }
-
-       toast.success("Agreement sent!");
-     })
-     .catch(() => toast.error("Something went wrong"));
- };
-
+    try {
+      const res = await axiosSecure.post("/agreements", agreementData);
+      toast.success("Agreement sent!");
+      console.log(res)
+    } catch (error) {
+      const msg = error.res?.data?.message || "Something went wrong!";
+      toast.error(msg);
+    }
+  };
 
   return (
     <div className="p-4">
@@ -91,11 +81,10 @@ const Apartments = () => {
           value={maxRent}
           onChange={(e) => setMaxRent(e.target.value)}
         />
-        
         <button
           className="btn btn-primary"
           onClick={() => {
-            setPage(1); 
+            setPage(1);
             setSearchParams({ min: minRent, max: maxRent });
           }}
         >

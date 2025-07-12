@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../hooks/useAuth";
 import axios from "axios";
-import useAxios from "../../../../hooks/useAxios";
 import { Link } from "react-router";
 import SocialLogin from "../../SocialLogin/SocialLogin";
 
@@ -12,12 +11,13 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUserProfile } = useAuth();
-  const axiosInstance = useAxios();
-  const [uploading, setUploading] = useState(false);
 
+  const { createUser, updateUserProfile } = useAuth();
+
+  const [uploading, setUploading] = useState(false);
   const [profilePic, setProfilePic] = useState("");
 
+  // Image Upload Handler
   const handleImageUpload = async (e) => {
     setUploading(true);
     const image = e.target.files[0];
@@ -37,19 +37,19 @@ const Register = () => {
     }
   };
 
+  // Form Submit Handler
   const onSubmit = async (data) => {
     try {
       const result = await createUser(data.email, data.password);
       const firebaseUser = result.user;
       console.log(firebaseUser)
-
-      // Update Firebase profile
+      // Update Firebase Profile
       await updateUserProfile({
         displayName: `${data.firstName} ${data.lastName}`,
         photoURL: profilePic,
       });
 
-      // Send user to backend
+      // Prepare user info
       const userInfo = {
         email: data.email,
         name: `${data.firstName} ${data.lastName}`,
@@ -59,15 +59,23 @@ const Register = () => {
         last_log_in: new Date().toISOString(),
       };
 
-      const res = await axiosInstance.post("/users", userInfo);
-      console.log("User saved to DB", res.data);
+      // Send to backend using PUT (upsert)
+      await fetch(`${import.meta.env.VITE_API_URL}/users/${data.email}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      });
+
+      console.log("User registered and saved to backend successfully");
     } catch (error) {
-      console.error("Register Error", error);
+      console.error("Registration error:", error);
     }
   };
 
   return (
-    <div className="card shadow-xl bg-base-200 p-6">
+    <div className="card shadow-xl bg-base-200 p-6 max-w-xl mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <h2 className="text-2xl font-bold text-center">Create Account</h2>
 
@@ -132,8 +140,12 @@ const Register = () => {
           {uploading && <p className="text-blue-500">Uploading...</p>}
         </div>
 
-        <button type="submit" className="btn btn-primary w-full mt-2">
-          Register
+        <button
+          type="submit"
+          className="btn btn-primary w-full mt-2"
+          disabled={uploading}
+        >
+          {uploading ? "Please wait..." : "Register"}
         </button>
 
         <SocialLogin />

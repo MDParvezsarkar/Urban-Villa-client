@@ -28,16 +28,12 @@ const SocialLogin = () => {
           last_log_in: new Date().toISOString(),
         };
 
-        // Check if user exists before insert
+        // ✅ Use PUT to upsert user info
         try {
-          const res = await axiosInstance.post("/users", userInfo);
-          if (res.data.insertedId) {
-            console.log("✅ New user added from Google login");
-          } else {
-            console.log("ℹ️ Existing user, no new insert");
-          }
+          const res = await axiosInstance.put(`/users/${user.email}`, userInfo);
+          console.log("✅ User upserted via Google login:", res.data);
         } catch (err) {
-          console.error("Error saving Google user to DB:", err);
+          console.error("❌ Error upserting Google user to DB:", err);
         }
 
         toast.success("Logged in with Google!");
@@ -50,11 +46,9 @@ const SocialLogin = () => {
       .finally(() => setLoading(false));
   };
 
-
   return (
     <div>
       <div className="divider">or</div>
-
       <button
         type="button"
         onClick={handleGoogleLogin}
