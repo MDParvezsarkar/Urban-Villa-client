@@ -1,0 +1,110 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
+const AgreementRequests = () => {
+  const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+    const axiosSecure = useAxiosSecure();
+  const fetchRequests = async () => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_URL}/agreements/pending`
+    );
+    setRequests(res.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
+
+const handleAccept = async (id, email, name) => {
+  try {
+    const res = await axiosSecure.patch(`/agreements/accept/${id}`, {
+      userEmail: email,
+      userName: name,
+    });
+
+    if (res.data?.userResult?.modifiedCount > 0) {
+      toast.success(`${name} is now a Member! 🎉`);
+      // refetch(); 
+    } else {
+      toast.error("Failed to promote user.");
+    }
+  } catch (err) {
+    toast.error("Something went wrong.");
+    console.error("❌ Promote failed:", err);
+  }
+};
+
+  const handleReject = async (id) => {
+    try {
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/agreements/reject/${id}`
+      );
+      fetchRequests();
+    } catch (err) {
+      console.error("❌ Reject failed:", err);
+    }
+  };
+
+  if (loading)
+    return <p className="text-center">Loading agreement requests...</p>;
+
+  return (
+    <div className="max-w-5xl mx-auto mt-8">
+      <h2 className="text-2xl font-bold mb-4">📝 Agreement Requests</h2>
+
+      {requests.length === 0 ? (
+        <p className="text-gray-600">No pending requests found.</p>
+      ) : (
+        <table className="w-full border">
+          <thead className="bg-gray-200">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Floor</th>
+              <th>Block</th>
+              <th>Room</th>
+              <th>Rent</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {requests.map((req) => (
+              <tr key={req._id} className="text-center border-b">
+                <td>{req.userName}</td>
+                <td>{req.userEmail}</td>
+                <td>{req.floor}</td>
+                <td>{req.block}</td>
+                <td>{req.apartmentNo}</td>
+                <td>{req.rent}</td>
+                <td>{new Date(req.date).toLocaleDateString()}</td>
+                <td className="space-x-2">
+                  <button
+                    className="bg-green-500 text-white px-2 py-1 rounded"
+                    onClick={() =>
+                      handleAccept(req._id, req.userEmail, req.userName)
+                    }
+                  >
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => handleReject(req._id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Reject
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
+
+export default AgreementRequests;

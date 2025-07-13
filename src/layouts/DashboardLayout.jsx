@@ -1,7 +1,14 @@
 import { Outlet, NavLink } from "react-router";
 import Logo from "../Pages/Shared/Logo/Logo";
+import useRole from "../hooks/useRole"; 
 
 const DashboardLayout = () => {
+  const { role, isLoading } = useRole(); 
+
+  if (isLoading) {
+    return <p className="text-center">Loading dashboard...</p>;
+  }
+
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
@@ -9,32 +16,32 @@ const DashboardLayout = () => {
         <Logo />
         <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
         <nav className="flex flex-col space-y-2">
+          {/* Common Links */}
           <NavLink to="/dashboard/profile">My Profile</NavLink>
           <NavLink to="/dashboard/announcements">Announcements</NavLink>
-          {/* Role-based nav */}
-          {/* For Member */}
-          <NavLink to="/dashboard/payment">Make Payment</NavLink>
-          <NavLink to="/dashboard/history">Payment History</NavLink>
-          {/* For Admin */}
-          <NavLink to="/dashboard/manage-members">Manage Members</NavLink>
-          <NavLink to="/dashboard/announcement">Make Announcement</NavLink>
-          <NavLink to="/dashboard/agreements">Agreement Requests</NavLink>
-          <NavLink to="/dashboard/coupons">Manage Coupons</NavLink>
-          {/* {userRole === "member" && (
+
+          {/* Member Links */}
+          {role === "member" && (
             <>
-              <NavLink to="/dashboard/payment">Make Payment</NavLink>
-              <NavLink to="/dashboard/history">Payment History</NavLink>
+              <NavLink to="/dashboard/make-payment">Make Payment</NavLink>
+              <NavLink to="/dashboard/payment-history">Payment History</NavLink>
             </>
           )}
 
-          {userRole === "admin" && (
+          {/* Admin Links */}
+          {role === "admin" && (
             <>
+              <NavLink to="/dashboard/admin-profile">Admin Profile</NavLink>
               <NavLink to="/dashboard/manage-members">Manage Members</NavLink>
-              <NavLink to="/dashboard/announcement">Make Announcement</NavLink>
-              <NavLink to="/dashboard/agreements">Agreement Requests</NavLink>
-              <NavLink to="/dashboard/coupons">Manage Coupons</NavLink>
+              <NavLink to="/dashboard/make-announcement">
+                Make Announcement
+              </NavLink>
+              <NavLink to="/dashboard/agreement-requests">
+                Agreement Requests
+              </NavLink>
+              <NavLink to="/dashboard/manage-coupons">Manage Coupons</NavLink>
             </>
-          )} */}
+          )}
         </nav>
       </aside>
 

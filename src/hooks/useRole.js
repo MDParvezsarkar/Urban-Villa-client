@@ -6,12 +6,17 @@ const useRole = () => {
   const [role, setRole] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  
   useEffect(() => {
     if (user?.email) {
-      fetch(`/api/users/role/${user.email}`)
+      fetch(`${import.meta.env.VITE_API_URL}/users/role/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-          setRole(data.role); // example: "admin", "member", "user"
+          setRole(data.role);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error("❌ Failed to fetch role:", err);
           setIsLoading(false);
         });
     }

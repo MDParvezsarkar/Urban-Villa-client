@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router";
 import { router } from "./router/router";
 import AuthProvider from "./contexts/AuthContext/AuthProvider";
 import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoadingProvider } from "./contexts/LoadingContext";
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
           <LoadingProvider>
             <RouterProvider router={router} />
             <ToastContainer position="top-center" />
+            <Toaster position="top-center" />
           </LoadingProvider>
         </AuthProvider>
       </QueryClientProvider>

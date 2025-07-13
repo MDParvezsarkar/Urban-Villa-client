@@ -1,6 +1,6 @@
 import { useLocation, Navigate } from "react-router";
-import useAuth from "../hooks/useAuth";
-import useRole from "../hooks/useRole"; 
+import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole"; 
 
 const MemberRoute = ({ children }) => {
   const { user, loading } = useAuth();

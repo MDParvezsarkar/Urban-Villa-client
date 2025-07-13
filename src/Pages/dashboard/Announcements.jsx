@@ -1,10 +1,29 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const Announcements = () => {
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/announcements`).then((res) => {
+      setAnnouncements(res.data);
+    });
+  }, []);
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Announcements</h1>
-      <ul className="list-disc ml-5">
-        <li>New parking rules from August</li>
-        <li>Water maintenance this weekend</li>
+    <div className="max-w-3xl mx-auto mt-6 p-4 bg-white rounded shadow">
+      <h1 className="text-2xl font-bold mb-4">📢 Announcements</h1>
+      <ul className="space-y-3">
+        {announcements.length === 0 && <p>No announcements yet.</p>}
+        {announcements.map((a, index) => (
+          <li key={index} className="border-l-4 border-blue-500 pl-4">
+            <h3 className="font-semibold text-lg">{a.title}</h3>
+            <p>{a.description}</p>
+            <p className="text-sm text-gray-500">
+              {new Date(a.createdAt).toLocaleString()}
+            </p>
+          </li>
+        ))}
       </ul>
     </div>
   );

@@ -23,7 +23,7 @@ const useAxiosSecure = () => {
     );
 
     return () => {
-      axiosSecure.interceptors.request.eject(interceptor); // clean up
+      axiosSecure.interceptors.request.eject(interceptor); 
     };
   }, []);
 
