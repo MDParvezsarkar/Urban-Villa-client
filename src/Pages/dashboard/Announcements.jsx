@@ -12,11 +12,11 @@ const Announcements = () => {
 
   return (
     <div className="max-w-3xl mx-auto mt-6 p-4 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">📢 Announcements</h1>
+      <h1 className="text-2xl text-secondary font-bold mb-4">Announcements</h1>
       <ul className="space-y-3">
         {announcements.length === 0 && <p>No announcements yet.</p>}
         {announcements.map((a, index) => (
-          <li key={index} className="border-l-4 border-blue-500 pl-4">
+          <li key={index} className="border-l-4 border-secondary pl-4">
             <h3 className="font-semibold text-lg">{a.title}</h3>
             <p>{a.description}</p>
             <p className="text-sm text-gray-500">

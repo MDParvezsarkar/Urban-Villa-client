@@ -1,7 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import Logo from '../Pages/Shared/Logo/Logo';
-
+import Lottie from 'lottie-react';
+import loginAnimation from "../assets/lottie/login.json";
 const AuthLayout = () => {
     return (
       <div className="min-h-screen flex flex-col md:flex-row bg-base-100">
@@ -15,9 +16,11 @@ const AuthLayout = () => {
           {/* Main content - centered */}
           <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
             <h1 className="text-3xl font-bold">Welcome Back!</h1>
-            <p className="mt-2">
-              Here you can show an image or a Lottie animation
-            </p>
+            <Lottie
+              animationData={loginAnimation}
+              loop
+              className="max-w-md w-full"
+            />
           </div>
         </div>
 

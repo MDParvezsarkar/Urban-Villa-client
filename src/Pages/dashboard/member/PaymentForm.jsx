@@ -33,7 +33,9 @@ const PaymentForm = ({ agreement }) => {
     try {
       const res = await axiosSecure.get(`/coupons`);
       const matched = res.data.find(
-        (c) => c.code.toLowerCase() === couponCode.toLowerCase()
+        (c) =>
+          c.code.toLowerCase() === couponCode.toLowerCase() &&
+          c.available === true
       );
 
       if (matched) {
@@ -130,7 +132,7 @@ const PaymentForm = ({ agreement }) => {
       <p>
         <strong>Total Rent:</strong> ${finalRent}{" "}
         {discount > 0 && (
-          <span className="text-green-500 ml-2">({discount}% off)</span>
+          <span className="text-primary ml-2">({discount}% off)</span>
         )}
       </p>
       <select
@@ -148,7 +150,7 @@ const PaymentForm = ({ agreement }) => {
       </select>
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-60"
+        className="bg-primary text-white px-4 py-2 rounded disabled:opacity-60"
         disabled={!stripe || processing}
       >
         {processing ? "Processing..." : "Pay"}

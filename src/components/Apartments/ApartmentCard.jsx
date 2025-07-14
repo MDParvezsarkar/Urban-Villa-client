@@ -1,7 +1,7 @@
 import React from "react";
 
 const ApartmentCard = ({ apartment, onAgree }) => {
-  const { image, floor, block, apartmentNo, rent } = apartment;
+  const { image, floor, block, apartmentNo, rent, isRented } = apartment;
 
   return (
     <div className="card bg-base-100 shadow-md p-4">
@@ -13,11 +13,13 @@ const ApartmentCard = ({ apartment, onAgree }) => {
         <p>Floor: {floor}</p>
         <p>Block: {block}</p>
         <p>Rent: {rent} ৳</p>
+
         <button
           onClick={() => onAgree(apartment)}
+          disabled={isRented}
           className="btn btn-primary btn-sm"
         >
-          Make Agreement
+          {isRented ? "Already Rented" : "Make Agreement"}
         </button>
       </div>
     </div>

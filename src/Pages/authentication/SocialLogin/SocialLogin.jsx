@@ -52,7 +52,7 @@ const SocialLogin = () => {
       <button
         type="button"
         onClick={handleGoogleLogin}
-        className="btn btn-outline btn-accent w-full"
+        className="btn btn-outline btn-primary w-full"
       >
         <FcGoogle className="w-5 h-5 mr-2" />
         Continue with Google

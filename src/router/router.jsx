@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
     children: [
       // -------------------------
       // 🔸 COMMON (user + member + admin)
-      { path: "profile", element: <Profile /> },
+      { path: "profile", index:true, element: <Profile /> },
       { path: "announcements", element: <Announcements /> },
 
       // -------------------------

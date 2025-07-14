@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const ManageCoupons = () => {
+  const axiosSecure = useAxiosSecure();
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
   const { register, handleSubmit, reset } = useForm();
-  const [successMsg, setSuccessMsg] = useState("");
 
-  // Fetch all coupons
+  // ✅ Fetch all coupons
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/coupons`)
+    axiosSecure
+      .get("/coupons")
       .then((res) => {
         setCoupons(res.data);
         setLoading(false);
@@ -20,17 +21,17 @@ const ManageCoupons = () => {
         console.error("❌ Failed to fetch coupons:", err);
         setLoading(false);
       });
-  }, []);
+  }, [axiosSecure]);
 
-  // Handle form submission
+  // ✅ Handle new coupon form submission
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/coupons`,
-        data
-      );
+      const res = await axiosSecure.post("/coupons", {
+        ...data,
+        available: true, 
+      });
       if (res.data.insertedId) {
-        setSuccessMsg("✅ Coupon added successfully!");
+        toast.success("✅ Coupon added!");
         reset();
         setCoupons((prev) => [res.data.newCoupon, ...prev]);
       }
@@ -39,9 +40,36 @@ const ManageCoupons = () => {
     }
   };
 
+  // ✅ Toggle availability
+  const handleToggle = async (id, currentStatus) => {
+    try {
+      const res = await axiosSecure.patch(`/coupons/${id}`, {
+        available: !currentStatus,
+      });
+
+      if (res.data.modifiedCount > 0) {
+        setCoupons((prev) =>
+          prev.map((c) =>
+            c._id === id ? { ...c, available: !currentStatus } : c
+          )
+        );
+
+        toast.success(
+          !currentStatus
+            ? "✅ Coupon marked as available!"
+            : "❌ Coupon marked as unavailable!"
+        );
+      }
+    } catch (err) {
+      console.error("❌ Failed to update availability", err);
+      toast.error("Failed to update availability");
+    }
+  };
+
+
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">🎟️ Manage Coupons</h1>
+      <h1 className="text-2xl font-bold mb-4"> Manage Coupons</h1>
 
       {/* Coupon Form */}
       <form
@@ -66,11 +94,10 @@ const ManageCoupons = () => {
         ></textarea>
         <button
           type="submit"
-          className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+          className="bg-primary text-white py-2 px-4 rounded hover:bg-secondary"
         >
           Add Coupon
         </button>
-        {successMsg && <p className="text-green-600">{successMsg}</p>}
       </form>
 
       {/* Coupon Table */}
@@ -83,6 +110,7 @@ const ManageCoupons = () => {
               <th className="p-2 border">Code</th>
               <th className="p-2 border">Discount %</th>
               <th className="p-2 border">Description</th>
+              <th className="p-2 border">Available</th>
             </tr>
           </thead>
           <tbody>
@@ -91,6 +119,14 @@ const ManageCoupons = () => {
                 <td className="p-2 border text-center">{c.code}</td>
                 <td className="p-2 border text-center">{c.discount}</td>
                 <td className="p-2 border">{c.description}</td>
+                <td className="p-2 border text-center">
+                  <input
+                    type="checkbox"
+                    className="toggle toggle-success"
+                    checked={c.available}
+                    onChange={() => handleToggle(c._id, c.available)}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>

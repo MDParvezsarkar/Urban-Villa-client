@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ApartmentCard from "../../components/Apartments/ApartmentCard";
 import Pagination from "../../components/Apartments/Pagination";
 import useAuth from "../../hooks/useAuth";
@@ -27,13 +27,42 @@ const Apartments = () => {
   const apartments = data?.apartments || [];
   const totalPages = data?.totalPages || 1;
 
+  const [rentedList, setRentedList] = useState([]);
+
+  // ✅ Fetch already rented apartments (status: "checked")
+  useEffect(() => {
+    const fetchRented = async () => {
+      try {
+        const res = await axiosSecure.get("/agreements/checked");
+        const checked = res.data.filter((a) => a.status === "checked");
+        setRentedList(
+          checked.map(
+            (a) => `${a.floor}-${a.block}-${a.apartmentNo}` 
+          )
+        );
+      } catch (err) {
+        console.error("Failed to load rented apartments",err);
+      }
+    };
+
+    fetchRented();
+  }, [axiosSecure]);
+
+  // ✅ Add flag isRented to apartment list
+  const enrichedApartments = apartments.map((apt) => {
+    const uniqueKey = `${apt.floor}-${apt.block}-${apt.apartmentNo}`;
+    return {
+      ...apt,
+      isRented: rentedList.includes(uniqueKey),
+    };
+  });
+
   if (isLoading) return <MoonLoaderComponent />;
   if (error)
     return (
       <p className="text-red-500 text-center mt-10">❌ Failed to load data</p>
     );
 
-  // ✅ Secure Agreement Handler with Token
   const handleAgreement = async (apartment) => {
     if (!user) {
       toast.warn("Please login first!");
@@ -56,7 +85,7 @@ const Apartments = () => {
       toast.success("Agreement sent!");
       console.log(res)
     } catch (error) {
-      const msg = error.res?.data?.message || "Something went wrong!";
+      const msg = error.response?.data?.message || "Something went wrong!";
       toast.error(msg);
     }
   };
@@ -94,7 +123,7 @@ const Apartments = () => {
 
       {/* 🏢 Apartment List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {apartments.map((apt) => (
+        {enrichedApartments.map((apt) => (
           <ApartmentCard
             key={apt._id}
             apartment={apt}

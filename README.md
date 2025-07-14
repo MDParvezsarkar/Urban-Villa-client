@@ -1,78 +1,77 @@
 # 🏢 UrbanVilla - Building Management System
 
-A full-stack web application to manage a single building system with admin, member, and user features.
+A full-stack web application to manage a single building system with **Admin**, **Member**, and **User** roles.
+
+---
 
 ## 🔗 Live Links
 
-- 🌐 Live Site: [https://urban-villlage-c50c6.web.app]
-- 🔧 Server: [https://b11a12-server-side-mdp-arvezsarkar.vercel.app]
-- 📦 Client Repo: [https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-MDParvezsarkar]
-- ⚙️ Server Repo: [https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-MDParvezsarkar]
+- 🌐 **Live Site**: [https://urban-villlage-c50c6.web.app](https://urban-villlage-c50c6.web.app)
+- 🔧 **Server**: [https://b11a12-server-side-mdp-arvezsarkar.vercel.app](https://b11a12-server-side-mdp-arvezsarkar.vercel.app)
+- 📦 **Client Repo**: [Client GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-MDParvezsarkar)
+- ⚙️ **Server Repo**: [Server GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-MDParvezsarkar)
 
 ---
 
-## 👥 Admin Credentials
 
-- ✉️ Email: admin@urbanvilla.com  
-- 🔒 Password: 123456
 
----
+## ✨ Key Features
 
-## 🧩 Key Features
-
-### ✨ Public
-- Fancy Home Page with Banner, Location, About Building
-- View Apartments with Pagination & Rent Range Search
-- Apply for Apartment Agreement
+### 🏠 Public
+- Stylish home page with banner, map location & building info
+- View all apartments (with rent range filter + pagination)
+- Apply for agreement (user must be logged in)
 
 ### 🔐 Authentication
 - Firebase Auth (Email/Password + Google)
-- Protected Routes with Role-based Dashboard
+- Role-based protected routes
+- Secure `.env` for Firebase config (client) & MongoDB (server)
 
 ### 👤 User Dashboard
-- View Profile
-- See Announcements
+- Profile info (Name, Email, Role)
+- View announcements
 
-### 🏠 Member Dashboard
-- View Profile with Agreement Info
-- Make Payment via Stripe
-- Apply Coupon Discount
-- Payment History
-- View Announcements
+### 🏢 Member Dashboard
+- View profile with apartment agreement info
+- Make payment (Stripe integration)
+- Apply coupon for rent discount
+- Select month for rent
+- View payment history
+- Announcements
 
 ### 🛠️ Admin Dashboard
-- Manage Members (Remove role)
-- Make Announcements
-- Handle Agreement Requests (Accept/Reject)
-- Manage Coupons (Add/Edit/Toggle)
-- View Profile with Stats (Rooms, Users, Members)
+- View admin profile with system stats
+- Manage members (change role)
+- Make public announcements
+- Handle agreement requests (accept/reject)
+- Manage coupons (add/edit/toggle availability)
 
 ---
 
-## 💡 Challenge Features (If Implemented)
-- Admin Dashboard Analytics
-- Coupon Availability Toggle
-- Due Rent Notice System
+## 💡 Challenge Features (Implemented)
+- ✅ Admin dashboard stats (total rooms, users, etc.)
+- ✅ Toggle coupon availability
+- ✅ Due rent notice system with warning count
 
 ---
 
-## 🧪 Technologies Used
+## 🔧 Technologies Used
 
 - React.js + Vite
 - Firebase Auth
 - Express.js + MongoDB
+- Stripe (Payment)
 - Tailwind CSS + DaisyUI
-- Stripe Payment Gateway
 - TanStack React Query
 - Axios (with interceptor)
 - React Router DOM
-- JWT Auth Middleware (Firebase)
-- dotenv (.env secure)
-- Vercel & Firebase Deployment
+- JWT Middleware (via Firebase Admin SDK)
+- Environment variables using dotenv
+- Deployment: Firebase (client) + Vercel (server)
 
 ---
 
-## 📂 NPM Packages
+## 📦 NPM Packages
 
 ```bash
 react-router-dom  
@@ -82,7 +81,7 @@ firebase
 axios  
 @tanstack/react-query  
 react-hot-toast  
-react-icons    
+react-icons  
 cors  
 dotenv  
 express  

@@ -15,7 +15,7 @@ const About = () => {
           className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4"
           data-aos="fade-down"
         >
-          Discover <span className="text-blue-600">Urban Heights</span>
+          Discover <span className="text-secondary">Urban Heights</span>
         </h2>
         <p
           className="text-lg md:text-xl text-gray-600 leading-relaxed"
@@ -33,10 +33,10 @@ const About = () => {
           className="bg-white/70 backdrop-blur-lg border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
           data-aos="fade-right"
         >
-          <div className="text-indigo-600 text-4xl mb-4">
+          <div className="text-primary text-4xl mb-4">
             <FaCouch />
           </div>
-          <h4 className="text-xl font-semibold mb-2 text-indigo-700">
+          <h4 className="text-xl font-semibold mb-2 text-primary">
             Premium Facilities
           </h4>
           <p className="text-gray-700 text-sm">
@@ -50,10 +50,10 @@ const About = () => {
           className="bg-white/70 backdrop-blur-lg border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
           data-aos="zoom-in"
         >
-          <div className="text-yellow-600 text-4xl mb-4">
+          <div className="text-secondary text-4xl mb-4">
             <FaLeaf />
           </div>
-          <h4 className="text-xl font-semibold mb-2 text-yellow-700">
+          <h4 className="text-xl font-semibold mb-2 text-secondary">
             Sustainable Design
           </h4>
           <p className="text-gray-700 text-sm">
@@ -67,10 +67,10 @@ const About = () => {
           className="bg-white/70 backdrop-blur-lg border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
           data-aos="fade-left"
         >
-          <div className="text-pink-600 text-4xl mb-4">
+          <div className="text-primary text-4xl mb-4">
             <FaUsers />
           </div>
-          <h4 className="text-xl font-semibold mb-2 text-pink-700">
+          <h4 className="text-xl font-semibold mb-2 text-primary">
             Community Spaces
           </h4>
           <p className="text-gray-700 text-sm">

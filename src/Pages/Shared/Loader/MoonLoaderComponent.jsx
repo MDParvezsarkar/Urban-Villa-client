@@ -1,13 +1,12 @@
 // src/Shared/MoonLoaderComponent.jsx
-import { MoonLoader } from "react-spinners";
+
+import Lottie from "lottie-react";
+import loginAnimation from "../../../assets/lottie/loading";
 
 const MoonLoaderComponent = () => {
   return (
-    <div className="fixed inset-0 bg-white bg-opacity-80 flex flex-col items-center justify-center z-[9999]">
-      <MoonLoader size={70} color="#2563eb" />
-      <p className="mt-4 text-xl font-medium">
-        আপনার চাওয়া পূরণ করতে সময় লাগতেছে 😅
-      </p>
+    <div className="fixed inset-0 bg-primary bg-opacity-80 flex flex-col items-center justify-center z-[9999]">
+      <Lottie animationData={loginAnimation} loop className="max-w-md w-full" />
     </div>
   );
 };

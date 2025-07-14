@@ -1,10 +1,17 @@
+import Lottie from "lottie-react";
+import error404 from "../../assets/lottie/error404.json";
+
 const Error404 = () => {
   return (
-    <div className="h-screen flex justify-center items-center text-center">
+    <div className="h-screen bg-secondary flex justify-center items-center text-center">
       <div>
-        <h1 className="text-6xl font-bold">404</h1>
         <p className="text-2xl mt-2">Page Not Found</p>
-        <a href="/" className="text-blue-500 underline mt-4 block">
+        <Lottie
+          animationData={error404}
+          loop
+          className="max-w-md w-full"
+        />
+        <a href="/" className="text-Primary text-2xl underline mt-4 block">
           Go to Home
         </a>
       </div>

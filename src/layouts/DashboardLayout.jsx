@@ -1,12 +1,13 @@
 import { Outlet, NavLink } from "react-router";
 import Logo from "../Pages/Shared/Logo/Logo";
 import useRole from "../hooks/useRole"; 
+import MoonLoaderComponent from "../Pages/Shared/Loader/MoonLoaderComponent";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole(); 
 
   if (isLoading) {
-    return <p className="text-center">Loading dashboard...</p>;
+    return <MoonLoaderComponent/>;
   }
 
   return (

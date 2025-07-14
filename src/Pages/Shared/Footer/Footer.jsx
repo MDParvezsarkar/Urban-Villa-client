@@ -2,11 +2,11 @@ import Logo from "../Logo/Logo";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12 px-6 md:px-12">
+    <footer className="bg-primary text-gray-300 py-12 px-6 md:px-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
         {/* Logo & Info */}
         <div className="space-y-4">
-          <Logo />
+          <Logo color="text-white" />
           <p className="text-sm text-gray-400">
             Providing reliable real estate service since 1992.
           </p>
@@ -46,15 +46,13 @@ const Footer = () => {
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-white">Follow Us</h3>
           <div className="flex space-x-4">
-            <a href="#" aria-label="Twitter" className="hover:text-white text-white">
-              
-            </a>
-            <a href="#" aria-label="YouTube" className="hover:text-white">
-              
-            </a>
-            <a href="#" aria-label="Facebook" className="hover:text-white">
-              
-            </a>
+            <a
+              href="#"
+              aria-label="Twitter"
+              className="hover:text-white text-white"
+            ></a>
+            <a href="#" aria-label="YouTube" className="hover:text-white"></a>
+            <a href="#" aria-label="Facebook" className="hover:text-white"></a>
           </div>
         </div>
       </div>

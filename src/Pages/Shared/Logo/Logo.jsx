@@ -1,16 +1,15 @@
-// Logo.jsx
 import { FaBuilding } from "react-icons/fa";
 import { Link } from "react-router";
 
+const Logo = ({ color }) => {
 
-const Logo = () => {
   return (
     <Link
       to="/"
-      className="flex items-center gap-2 text-secondary text-xl font-bold"
+      className={`flex items-center gap-2 text-xl font-bold ${color}`} 
     >
-      <FaBuilding className="text-secondary" size={32} />
-      <span>UrbanVilla</span>
+      <FaBuilding className={color} size={32} />
+      <span className={color}>UrbanVilla</span>
     </Link>
   );
 };

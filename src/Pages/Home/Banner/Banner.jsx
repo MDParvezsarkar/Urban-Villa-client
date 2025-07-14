@@ -38,29 +38,30 @@ const Banner = () => {
   ];
 
   return (
-    <div className="relative w-full h-[85vh] overflow-hidden">
-      <Slider {...settings}>
-        {slides.map((slide, index) => (
-          <div key={index} className="relative">
-            <img
-              src={slide.img}
-              alt={slide.title}
-              className="w-full h-[85vh] object-cover"
-            />
-            <div
-              className="absolute inset-0 bg-black/40 flex flex-col justify-center items-start px-10 md:px-24"
-              data-aos="fade-up"
-            >
-              <h2 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold max-w-[700px] leading-tight mb-4">
-                {slide.title}
-              </h2>
-              <button className="bg-white text-black px-6 py-3 rounded-full shadow hover:bg-gray-200 transition duration-300">
-                Explore Now
-              </button>
+    <div>
+      <div className="relative w-full h-[85vh] overflow-hidden">
+        <Slider {...settings}>
+          {slides.map((slide, index) => (
+            <div key={index} className="relative">
+              <img
+                src={slide.img}
+                alt={slide.title}
+                className="w-full h-[85vh] object-cover"
+                />
+              <div
+                className="absolute inset-0 bg-black/40 flex flex-col justify-center items-start px-10 md:px-24"
+                data-aos="fade-up"
+                >
+                
+                <h2 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold max-w-[700px] leading-tight mb-4">
+                  {slide.title}
+                </h2>
+                
+              </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };

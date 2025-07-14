@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
-// import SocialLogin from "../SocialLogin/SocialLogin";
+import { sendPasswordResetEmail, getAuth } from "firebase/auth";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
+    getValues, // ✅ ADD THIS!
     formState: { errors },
   } = useForm();
 
@@ -17,6 +19,26 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location.state?.from || "/";
 
+  // ✅ Reset Password Handler
+  const handleResetPassword = () => {
+    const email = getValues("email"); // ✅ get current email value
+    if (!email) {
+      toast.error("Please enter your email to reset password.");
+      return;
+    }
+
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toast.success("Password reset link sent to your email.");
+      })
+      .catch((error) => {
+        toast.error("Failed to send reset link.");
+        console.error(error);
+      });
+  };
+
+  // ✅ Login Handler
   const onSubmit = (data) => {
     signInUser(data.email, data.password)
       .then((result) => {
@@ -25,15 +47,15 @@ const Login = () => {
       })
       .catch((error) => {
         console.error("Login failed:", error.message);
+        toast.error("Login failed. Check your credentials.");
       });
   };
 
   return (
     <div className="card shadow-xl bg-base-200 p-6">
-      {/* <h2 className="text-xl font-semibold mb-4">Login Form Placeholder</h2> */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="card bg-base-200 p-6  space-y-4"
+        className="card bg-base-200 p-6 space-y-4"
       >
         <h2 className="text-2xl font-bold text-center">Login</h2>
 
@@ -73,11 +95,21 @@ const Login = () => {
           )}
         </div>
 
+        {/* ✅ Forgot Password */}
+        <p
+          className="text-sm text-center mt-2 text-primary hover:underline cursor-pointer"
+          onClick={handleResetPassword}
+        >
+          Forgot Password?
+        </p>
+
         {/* Submit Button */}
         <button type="submit" className="btn btn-primary w-full mt-2">
           Login
         </button>
-        <SocialLogin/>
+
+        {/* Social Login */}
+        <SocialLogin />
 
         {/* Register Link */}
         <p className="text-sm text-center mt-4">

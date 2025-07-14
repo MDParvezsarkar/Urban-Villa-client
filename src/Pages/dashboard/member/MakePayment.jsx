@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import PaymentForm from "./PaymentForm";
+import Loader from "../../Shared/Loader/Loader";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -21,7 +22,7 @@ const MakePayment = () => {
     enabled: !!user?.email,
   });
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (isLoading) return <Loader/>;
 
   return (
     <div>

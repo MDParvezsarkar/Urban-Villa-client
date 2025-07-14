@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loader from "../../Shared/Loader/Loader";
 
 const AgreementRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -50,7 +51,7 @@ const handleAccept = async (id, email, name) => {
   };
 
   if (loading)
-    return <p className="text-center">Loading agreement requests...</p>;
+    return <Loader/>;
 
   return (
     <div className="max-w-5xl mx-auto mt-8">

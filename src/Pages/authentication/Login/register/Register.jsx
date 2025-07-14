@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../hooks/useAuth";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import SocialLogin from "../../SocialLogin/SocialLogin";
-
+import toast from "react-hot-toast";
 const Register = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -43,13 +44,13 @@ const Register = () => {
       const result = await createUser(data.email, data.password);
       const firebaseUser = result.user;
       console.log(firebaseUser)
-      // Update Firebase Profile
+      // Update Firebase profile
       await updateUserProfile({
         displayName: `${data.firstName} ${data.lastName}`,
         photoURL: profilePic,
       });
 
-      // Prepare user info
+      // Prepare user info for backend
       const userInfo = {
         email: data.email,
         name: `${data.firstName} ${data.lastName}`,
@@ -59,7 +60,7 @@ const Register = () => {
         last_log_in: new Date().toISOString(),
       };
 
-      // Send to backend using PUT (upsert)
+      // Save to DB
       await fetch(`${import.meta.env.VITE_API_URL}/users/${data.email}`, {
         method: "PUT",
         headers: {
@@ -68,9 +69,12 @@ const Register = () => {
         body: JSON.stringify(userInfo),
       });
 
-      console.log("User registered and saved to backend successfully");
+      // ✅ Success message & redirect
+      toast.success("Registration successful!");
+      navigate("/");
     } catch (error) {
       console.error("Registration error:", error);
+      toast.error("Registration failed. Please try again.");
     }
   };
 

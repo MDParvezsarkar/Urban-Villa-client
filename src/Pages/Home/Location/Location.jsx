@@ -25,14 +25,14 @@ const Location = () => {
           className="text-4xl font-bold text-center mb-8 text-gray-800"
           data-aos="fade-up"
         >
-          📍 Our Apartment Location
+           Our Apartment Location
         </h2>
 
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Info */}
           <div data-aos="fade-right">
             <h3 className="text-2xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
-              <FaMapMarkedAlt className="text-blue-600" /> How to Reach Us
+              <FaMapMarkedAlt className="text-secondary" /> How to Reach Us
             </h3>
             <p className="text-gray-600 leading-relaxed">
               Located at the heart of the city, our apartments offer easy access
@@ -41,17 +41,17 @@ const Location = () => {
             </p>
             <ul className="mt-4 space-y-3 text-gray-600">
               <li className="flex items-center gap-2">
-                <FaTrain className="text-blue-500" /> 5 mins from Metro Station
+                <FaTrain className="text-primary" /> 5 mins from Metro Station
               </li>
               <li className="flex items-center gap-2">
-                <FaBusAlt className="text-green-600" /> Multiple Bus Routes
+                <FaBusAlt className="text-primary" /> Multiple Bus Routes
               </li>
               <li className="flex items-center gap-2">
-                <FaHospital className="text-red-600" /> Close to hospitals &
+                <FaHospital className="text-primary" /> Close to hospitals &
                 schools
               </li>
               <li className="flex items-center gap-2">
-                <FaShoppingCart className="text-yellow-600" /> Nearby Shopping
+                <FaShoppingCart className="text-primary" /> Nearby Shopping
                 Malls
               </li>
             </ul>
@@ -59,7 +59,7 @@ const Location = () => {
 
           {/* Map */}
           <div
-            className="rounded-xl overflow-hidden shadow-xl ring-2 ring-blue-200 hover:ring-blue-400 transition duration-300 h-[300px] md:h-[400px]"
+            className="rounded-xl overflow-hidden shadow-xl ring-2 ring-secondary hover:ring-primary transition duration-300 h-[300px] md:h-[400px]"
             data-aos="fade-left"
           >
             <MapContainer
