@@ -67,7 +67,7 @@ const handleAccept = async (id, email, name) => {
               <th>Email</th>
               <th>Floor</th>
               <th>Block</th>
-              <th>Room</th>
+              <th>Apartment No</th>
               <th>Rent</th>
               <th>Date</th>
               <th>Actions</th>
@@ -85,7 +85,7 @@ const handleAccept = async (id, email, name) => {
                 <td>{new Date(req.date).toLocaleDateString()}</td>
                 <td className="space-x-2">
                   <button
-                    className="bg-green-500 text-white px-2 py-1 rounded"
+                    className="bg-secondary text-white px-2 py-1 rounded"
                     onClick={() =>
                       handleAccept(req._id, req.userEmail, req.userName)
                     }
@@ -94,7 +94,7 @@ const handleAccept = async (id, email, name) => {
                   </button>
                   <button
                     onClick={() => handleReject(req._id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="bg-primary text-white px-2 py-1 rounded"
                   >
                     Reject
                   </button>

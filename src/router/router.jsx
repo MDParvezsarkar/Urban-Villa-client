@@ -27,6 +27,8 @@ import MakeAnnouncement from "../Pages/dashboard/admin/MakeAnnouncement";
 import AgreementRequests from "../Pages/dashboard/admin/AgreementRequests";
 import ManageCoupons from "../Pages/dashboard/admin/ManageCoupons";
 import SetAdminManually from "../Pages/setAdminManually/SetAdminManually";
+import About from "../Pages/Home/About/About";
+import Location from "../Pages/Home/Location/Location";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +37,9 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "/apertment", Component: Apartments },
+      { path: "/about", Component: About },
+      { path: "/apertment", Component: Apartments },
+      { path: "/contact", Component: Location },
       {
         path: "/admin-setup",
         element: <SetAdminManually />,
@@ -59,7 +64,8 @@ export const router = createBrowserRouter([
     children: [
       // -------------------------
       // 🔸 COMMON (user + member + admin)
-      { path: "profile", index:true, element: <Profile /> },
+      { index: true, element: <Announcements /> },
+      { path: "profile", index: true, element: <Profile /> },
       { path: "announcements", element: <Announcements /> },
 
       // -------------------------

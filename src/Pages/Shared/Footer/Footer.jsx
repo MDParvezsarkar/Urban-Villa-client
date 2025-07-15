@@ -1,58 +1,83 @@
+import { Link } from "react-router";
+import { FaFacebook, FaLinkedin, FaGithub } from "react-icons/fa";
 import Logo from "../Logo/Logo";
 
 const Footer = () => {
   return (
     <footer className="bg-primary text-gray-300 py-12 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-        {/* Logo & Info */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Logo & Description */}
         <div className="space-y-4">
           <Logo color="text-white" />
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-300">
             Providing reliable real estate service since 1992.
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs text-gray-400">
             © {new Date().getFullYear()} All rights reserved.
           </p>
         </div>
 
-        {/* Navigation */}
+        {/* Navigation Links */}
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-white">Quick Links</h3>
-          <ul className="space-y-2">
+          <ul className="space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/" className="hover:underline hover:text-white">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link
+                to="/apertment"
+                className="hover:underline hover:text-white"
+              >
                 Apartments
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/about" className="hover:underline hover:text-white">
                 About Building
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/contact" className="hover:underline hover:text-white">
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* Social Links */}
+        {/* Social Media */}
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-white">Follow Us</h3>
-          <div className="flex space-x-4">
+          <div className="flex space-x-6 text-white text-xl">
             <a
-              href="#"
-              aria-label="Twitter"
-              className="hover:text-white text-white"
-            ></a>
-            <a href="#" aria-label="YouTube" className="hover:text-white"></a>
-            <a href="#" aria-label="Facebook" className="hover:text-white"></a>
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-secondary transition"
+              aria-label="Facebook"
+            >
+              <FaFacebook />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-secondary transition"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin />
+            </a>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-secondary transition"
+              aria-label="GitHub"
+            >
+              <FaGithub />
+            </a>
           </div>
         </div>
       </div>

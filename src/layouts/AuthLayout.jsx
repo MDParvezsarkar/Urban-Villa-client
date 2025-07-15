@@ -3,6 +3,7 @@ import { Outlet } from 'react-router';
 import Logo from '../Pages/Shared/Logo/Logo';
 import Lottie from 'lottie-react';
 import loginAnimation from "../assets/lottie/login.json";
+import DynamicTitle from '../Pages/Shared/pageTitle/DynamicTitle';
 const AuthLayout = () => {
     return (
       <div className="min-h-screen flex flex-col md:flex-row bg-base-100">
@@ -27,6 +28,7 @@ const AuthLayout = () => {
         {/* Right Side - Login Component */}
         <div className="w-full md:w-1/2 flex items-center justify-center p-8">
           <div className="w-full max-w-md">
+            <DynamicTitle/>
             <Outlet />
           </div>
         </div>

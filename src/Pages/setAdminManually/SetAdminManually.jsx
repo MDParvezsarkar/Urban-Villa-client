@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 const SetAdminManually = () => {
   useEffect(() => {
-    fetch("http://localhost:5000/users", {
+    fetch(`${import.meta.env.VITE_API_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
