@@ -29,7 +29,8 @@ const handleAccept = async (id, email, name) => {
 
     if (res.data?.userResult?.modifiedCount > 0) {
       toast.success(`${name} is now a Member! 🎉`);
-      fetchRequests();  
+      fetchRequests();
+      
     } else {
       toast.error("Failed to promote user.");
     }
