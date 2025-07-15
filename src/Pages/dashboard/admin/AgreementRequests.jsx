@@ -29,7 +29,7 @@ const handleAccept = async (id, email, name) => {
 
     if (res.data?.userResult?.modifiedCount > 0) {
       toast.success(`${name} is now a Member! 🎉`);
-      // refetch(); 
+      fetchRequests();  
     } else {
       toast.error("Failed to promote user.");
     }
@@ -44,11 +44,16 @@ const handleAccept = async (id, email, name) => {
       await axios.patch(
         `${import.meta.env.VITE_API_URL}/agreements/reject/${id}`
       );
-      fetchRequests();
+
+      toast.success("Agreement rejected and removed successfully");
+
+      fetchRequests(); 
     } catch (err) {
       console.error("❌ Reject failed:", err);
+      toast.error("Failed to reject agreement");
     }
   };
+
 
   if (loading)
     return <Loader/>;
