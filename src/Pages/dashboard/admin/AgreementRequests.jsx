@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loader from "../../Shared/Loader/Loader";
+import { FaEnvelopeOpenText } from "react-icons/fa";
 
 const AgreementRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -61,7 +62,7 @@ const handleAccept = async (id, email, name) => {
 
   return (
     <div className="max-w-5xl mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">📝 Agreement Requests</h2>
+      <h2 className="text-2xl font-bold mb-4 flex gap-2"><FaEnvelopeOpenText/> Agreement Requests</h2>
 
       {requests.length === 0 ? (
         <p className="text-gray-600">No pending requests found.</p>
