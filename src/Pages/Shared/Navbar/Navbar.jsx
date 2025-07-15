@@ -79,9 +79,7 @@ const Navbar = () => {
               data-tip={user.displayName}
             >
               <img
-                src={
-                  user.photoURL || "https://i.ibb.co/MBtjqXQ/default-avatar.png"
-                }
+                src={user.photoURL || "https://i.ibb.co/tPZyGv4X/avatar.jpg"}
                 alt="Profile"
                 className="w-10 h-10 rounded-full border-2 border-primary"
               />

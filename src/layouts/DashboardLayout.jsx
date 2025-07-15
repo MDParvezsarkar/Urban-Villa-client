@@ -7,77 +7,57 @@ import DynamicTitle from "../Pages/Shared/pageTitle/DynamicTitle";
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
 
-  if (isLoading) {
-    return <MoonLoaderComponent />;
-  }
-
-  // ✅ Active class styling
-  const navLinkClass = ({ isActive }) =>
-    isActive
-      ? "bg-white text-primary font-semibold px-4 py-2 rounded-md"
-      : "hover:bg-white hover:text-primary px-4 py-2 rounded-md transition";
+  if (isLoading) return <MoonLoaderComponent />;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 text-white p-4 space-y-4">
-        <Logo />
-        <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-        <nav className="flex flex-col space-y-2">
-          {/* Common Links */}
-          <NavLink to="/dashboard/announcements" className={navLinkClass}>
-            Announcements
-          </NavLink>
-          {/* Member & User */}
-          {(role === "member" || role === "user") && (
-            <NavLink to="/dashboard/profile" className={navLinkClass}>
-              My Profile
-            </NavLink>
-          )}
-
+      <aside className="bg-gray-800 text-white w-full md:w-64 p-4">
+        <div className="flex justify-between items-center md:block mb-4 md:mb-0">
+          <Logo />
+        </div>
+        <h2 className="text-2xl font-bold mb-4 hidden md:block">Dashboard</h2>
+        <nav className="flex md:flex-col gap-2 flex-wrap">
           {/* Member Links */}
           {role === "member" && (
             <>
-              <NavLink to="/dashboard/make-payment" className={navLinkClass}>
-                Make Payment
+              <NavLink
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-secondary font-semibold"
+                    : "hover:text-gray-300"
+                }
+              >
+                My Profile
               </NavLink>
-              <NavLink to="/dashboard/payment-history" className={navLinkClass}>
-                Payment History
-              </NavLink>
+              <NavLink to="/dashboard/make-payment">Make Payment</NavLink>
+              <NavLink to="/dashboard/payment-history">Payment History</NavLink>
             </>
           )}
 
           {/* Admin Links */}
           {role === "admin" && (
             <>
-              <NavLink to="/dashboard/admin-profile" className={navLinkClass}>
-                Admin Profile
-              </NavLink>
-              <NavLink to="/dashboard/manage-members" className={navLinkClass}>
-                Manage Members
-              </NavLink>
-              <NavLink
-                to="/dashboard/make-announcement"
-                className={navLinkClass}
-              >
+              <NavLink to="/dashboard/admin-profile">Admin Profile</NavLink>
+              <NavLink to="/dashboard/manage-members">Manage Members</NavLink>
+              <NavLink to="/dashboard/make-announcement">
                 Make Announcement
               </NavLink>
-              <NavLink
-                to="/dashboard/agreement-requests"
-                className={navLinkClass}
-              >
+              <NavLink to="/dashboard/agreement-requests">
                 Agreement Requests
               </NavLink>
-              <NavLink to="/dashboard/manage-coupons" className={navLinkClass}>
-                Manage Coupons
-              </NavLink>
+              <NavLink to="/dashboard/manage-coupons">Manage Coupons</NavLink>
             </>
           )}
+
+          {/* Shared Links */}
+          <NavLink to="/dashboard/announcements">Announcements</NavLink>
         </nav>
       </aside>
 
-      {/* Content */}
-      <main className="flex-1 p-6 bg-gray-100">
+      {/* Main Content */}
+      <main className="flex-1 bg-gray-100 p-4 md:p-6">
         <DynamicTitle />
         <Outlet />
       </main>

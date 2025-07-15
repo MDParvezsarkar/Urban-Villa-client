@@ -50,7 +50,7 @@ const Profile = () => {
       <h2 className="text-xl font-bold mb-4">My Profile</h2>
       <div>
         <img
-          src={user?.photoURL || "https://i.ibb.co/2M3Lz4p/avatar.png"}
+          src={user?.photoURL || "https://i.ibb.co/tPZyGv4X/avatar.jpg"}
           alt="Profile"
           className="w-20 h-20 rounded-full"
         />
