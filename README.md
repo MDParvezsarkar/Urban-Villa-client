@@ -1,79 +1,115 @@
-# 🏢 UrbanVilla - Building Management System
+🏢 UrbanVilla - Building Management System
+A full-stack web application to manage a single building system with Admin, Member, and User roles.
 
-A full-stack web application to manage a single building system with **Admin**, **Member**, and **User** roles.
+🔗 Live Links
+🌐 Live Site: [urban-villlage.web.app](https://urban-villlage-c50c6.web.app)
 
----
+⚙️ Server: [https://b11a12-server-side-mdp-arvezsarkar.vercel.app](https://b11a12-server-side-mdp-arvezsarkar.vercel.app)
 
-## 🔗 Live Links
+📦 Client Repo: [Client GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-MDParvezsarkar)
 
-- 🌐 **Live Site**: [https://urban-villlage-c50c6.web.app](https://urban-villlage-c50c6.web.app)
-- 🔧 **Server**: [https://b11a12-server-side-mdp-arvezsarkar.vercel.app](https://b11a12-server-side-mdp-arvezsarkar.vercel.app)
-- 📦 **Client Repo**: [Client GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-MDParvezsarkar)
-- ⚙️ **Server Repo**: [Server GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-MDParvezsarkar)
+🔧 Server Repo: [Server GitHub](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-MDParvezsarkar)
 
----
+✨ Key Features
+🏠 Public
+Interactive landing page with animated banner, Google map, and key facilities
+
+View available apartments (with filter & pagination)
+
+Apply for apartment agreement (login required)
+
+🔐 Authentication
+Firebase (Email/Password + Google login)
+
+Role-based access with protected routes
+
+Secure token verification using Firebase Admin SDK
+
+👤 User Dashboard
+View profile with name, email, and role
+
+See latest announcements
+
+🏢 Member Dashboard
+View rental agreement (floor, block, room, etc.)
+
+Make rent payment using Stripe
+
+Apply coupon codes for discounts
+
+Choose rent month
+
+View payment history
+
+Access all public announcements
+
+🛠️ Admin Dashboard
+View detailed admin profile with building stats:
+
+Total apartments
+
+Members vs users
+
+Available room percentage
+
+Manage members (role change, demotion after 3 missed rents)
+
+Make public announcements (auto & manual)
+
+Handle agreement requests (accept/reject)
+
+Manage coupons (add, edit, toggle availability)
+
+💡 Challenge Features Implemented
+✅ Admin dashboard stats
+
+✅ Coupon availability toggle
+
+✅ Due rent notice system
+
+Sends monthly warnings to members who didn't pay
+
+After 3 missed rents, role auto-downgrades to user
+
+Announcement auto-posted with demotion reason
+
+Deleted apartment agreement for freed-up apartment
+
+Toast alert for demoted user on next login
 
 
 
-## ✨ Key Features
+🔧 Technologies Used
+React.js + Vite
 
-### 🏠 Public
-- Stylish home page with banner, map location & building info
-- View all apartments (with rent range filter + pagination)
-- Apply for agreement (user must be logged in)
+Firebase Auth (client) + Firebase Admin SDK (server)
 
-### 🔐 Authentication
-- Firebase Auth (Email/Password + Google)
-- Role-based protected routes
-- Secure `.env` for Firebase config (client) & MongoDB (server)
+Express.js + MongoDB
 
-### 👤 User Dashboard
-- Profile info (Name, Email, Role)
-- View announcements
+Stripe (payment)
 
-### 🏢 Member Dashboard
-- View profile with apartment agreement info
-- Make payment (Stripe integration)
-- Apply coupon for rent discount
-- Select month for rent
-- View payment history
-- Announcements
+Tailwind CSS + DaisyUI
 
-### 🛠️ Admin Dashboard
-- View admin profile with system stats
-- Manage members (change role)
-- Make public announcements
-- Handle agreement requests (accept/reject)
-- Manage coupons (add/edit/toggle availability)
+TanStack React Query
 
----
+Axios (with interceptors)
 
-## 💡 Challenge Features (Implemented)
-- ✅ Admin dashboard stats (total rooms, users, etc.)
-- ✅ Toggle coupon availability
-- ✅ Due rent notice system with warning count
+React Router DOM
 
----
+JWT Middleware via Firebase
 
-## 🔧 Technologies Used
+Environment Variables (.env)
 
-- React.js + Vite
-- Firebase Auth
-- Express.js + MongoDB
-- Stripe (Payment)
-- Tailwind CSS + DaisyUI
-- TanStack React Query
-- Axios (with interceptor)
-- React Router DOM
-- JWT Middleware (via Firebase Admin SDK)
-- Environment variables using dotenv
-- Deployment: Firebase (client) + Vercel (server)
+Deployment:
 
----
+Firebase (Client)
 
-## 📦 NPM Packages
+Vercel (Server)
 
-```bash
+📦 NPM Packages
+bash
+Copy
+Edit
 react-router-dom  
 @stripe/react-stripe-js  
 @stripe/stripe-js  
