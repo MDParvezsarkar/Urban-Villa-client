@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { FaTags } from "react-icons/fa";
+import Loader from "../../Shared/Loader/Loader";
 
 const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
@@ -69,7 +71,10 @@ const ManageCoupons = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4"> Manage Coupons</h1>
+      <h1 className="text-2xl font-bold mb-4 flex gap-3 items-center">
+        {" "}
+        Manage Coupons <FaTags />
+      </h1>
 
       {/* Coupon Form */}
       <form
@@ -102,35 +107,40 @@ const ManageCoupons = () => {
 
       {/* Coupon Table */}
       {loading ? (
-        <p className="text-center mt-6">Loading coupons...</p>
+        <Loader />
       ) : (
-        <table className="w-full mt-6 table-auto border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="p-2 border">Code</th>
-              <th className="p-2 border">Discount %</th>
-              <th className="p-2 border">Description</th>
-              <th className="p-2 border">Available</th>
-            </tr>
-          </thead>
-          <tbody>
-            {coupons.map((c) => (
-              <tr key={c._id}>
-                <td className="p-2 border text-center">{c.code}</td>
-                <td className="p-2 border text-center">{c.discount}</td>
-                <td className="p-2 border">{c.description}</td>
-                <td className="p-2 border text-center">
-                  <input
-                    type="checkbox"
-                    className="toggle toggle-success"
-                    checked={c.available}
-                    onChange={() => handleToggle(c._id, c.available)}
-                  />
-                </td>
+        <div className="overflow-x-auto mt-6">
+          <table className="table w-full min-w-[700px] border border-primary shadow rounded-md">
+            <thead className="bg-primary text-white">
+              <tr>
+                <th className="p-2 border">Code</th>
+                <th className="p-2 border">Discount %</th>
+                <th className="p-2 border">Description</th>
+                <th className="p-2 border">Available</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white text-center">
+              {coupons.map((c) => (
+                <tr
+                  key={c._id}
+                  className="hover:bg-secondary/10 transition-all duration-300"
+                >
+                  <td className="p-2 border text-center">{c.code}</td>
+                  <td className="p-2 border text-center">{c.discount}</td>
+                  <td className="p-2 border">{c.description}</td>
+                  <td className="p-2 border text-center">
+                    <input
+                      type="checkbox"
+                      className="toggle toggle-success"
+                      checked={c.available}
+                      onChange={() => handleToggle(c._id, c.available)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

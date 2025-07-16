@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { MdCampaign, MdOutlineCampaign } from "react-icons/md";
 
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
@@ -12,7 +13,7 @@ const Announcements = () => {
 
   return (
     <div className="max-w-3xl mx-auto mt-6 p-4 bg-white rounded shadow">
-      <h1 className="text-2xl text-secondary font-bold mb-4">Announcements</h1>
+      <h1 className="text-2xl text-secondary font-bold mb-4 flex gap-3 items-center">Announcements <MdOutlineCampaign className="text-4xl"/></h1>
       <ul className="space-y-3">
         {announcements.length === 0 && <p>No announcements yet.</p>}
         {announcements.map((a, index) => (

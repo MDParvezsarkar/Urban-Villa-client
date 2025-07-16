@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import SendNoticeButton from "../../../components/Admin/SendNoticeButton";
 import Loader from "../../Shared/Loader/Loader";
+import { FaUserCheck } from "react-icons/fa";
 
 const AdminProfile = () => {
   const { user } = useAuth();
@@ -22,7 +23,7 @@ const AdminProfile = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md space-y-2">
-      <h2 className="text-2xl font-semibold mb-4">👤 Admin Profile</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex gap-3 items-center"><FaUserCheck className="text-3xl"/> Admin Profile</h2>
       <img
         src={user?.photoURL || "https://i.ibb.co/2K9M3pZ/default-avatar.png"}
         alt="Admin Avatar"

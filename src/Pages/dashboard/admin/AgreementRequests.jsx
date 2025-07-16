@@ -62,54 +62,61 @@ const handleAccept = async (id, email, name) => {
 
   return (
     <div className="max-w-5xl mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4 flex gap-2"><FaEnvelopeOpenText/> Agreement Requests</h2>
+      <h2 className="text-2xl font-bold mb-4 flex gap-2 items-center">
+        <FaEnvelopeOpenText /> Agreement Requests
+      </h2>
 
       {requests.length === 0 ? (
         <p className="text-gray-600">No pending requests found.</p>
       ) : (
-        <table className="w-full border">
-          <thead className="bg-gray-200">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Floor</th>
-              <th>Block</th>
-              <th>Apartment No</th>
-              <th>Rent</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((req) => (
-              <tr key={req._id} className="text-center border-b">
-                <td>{req.userName}</td>
-                <td>{req.userEmail}</td>
-                <td>{req.floor}</td>
-                <td>{req.block}</td>
-                <td>{req.apartmentNo}</td>
-                <td>{req.rent}</td>
-                <td>{new Date(req.date).toLocaleDateString()}</td>
-                <td className="space-x-2">
-                  <button
-                    className="bg-secondary text-white px-2 py-1 rounded"
-                    onClick={() =>
-                      handleAccept(req._id, req.userEmail, req.userName)
-                    }
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={() => handleReject(req._id)}
-                    className="bg-primary text-white px-2 py-1 rounded"
-                  >
-                    Reject
-                  </button>
-                </td>
+        <div className="overflow-x-auto mt-6">
+          <table className="table w-full min-w-[700px] border border-primary shadow rounded-md">
+            <thead className="bg-primary text-white">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Floor</th>
+                <th>Block</th>
+                <th>Apartment No</th>
+                <th>Rent</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white text-center">
+              {requests.map((req) => (
+                <tr
+                  key={req._id}
+                  className="hover:bg-secondary/10 transition-all duration-300"
+                >
+                  <td>{req.userName}</td>
+                  <td>{req.userEmail}</td>
+                  <td>{req.floor}</td>
+                  <td>{req.block}</td>
+                  <td>{req.apartmentNo}</td>
+                  <td>{req.rent}</td>
+                  <td>{new Date(req.date).toLocaleDateString()}</td>
+                  <td className="space-x-2">
+                    <button
+                      className="bg-secondary text-white px-2 py-1 rounded"
+                      onClick={() =>
+                        handleAccept(req._id, req.userEmail, req.userName)
+                      }
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => handleReject(req._id)}
+                      className="bg-primary text-white px-2 py-1 rounded"
+                    >
+                      Reject
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

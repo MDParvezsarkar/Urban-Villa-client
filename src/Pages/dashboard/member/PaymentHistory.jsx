@@ -34,9 +34,12 @@ const PaymentHistory = () => {
               <th>Date</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white text-center">
             {payments.map((payment, index) => (
-              <tr key={payment._id}>
+              <tr
+                key={payment._id}
+                className="hover:bg-secondary/10 transition-all duration-300"
+              >
                 <td>{index + 1}</td>
                 <td>{payment.month || "N/A"}</td>
                 <td>${payment.amount}</td>
