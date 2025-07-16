@@ -121,16 +121,26 @@ const Register = () => {
           <input
             type="password"
             {...register("password", {
-              required: "Required",
+              required: "Password is required",
               minLength: {
                 value: 6,
-                message: "Min 6 characters",
+                message: "Minimum 6 characters required",
+              },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                message:
+                  "Must have at least 1 uppercase and 1 lowercase letter",
               },
             })}
             className="input input-bordered w-full"
           />
+          <small className="text-gray-400">
+            Must include uppercase and lowercase letters
+          </small>
           {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.password.message}
+            </p>
           )}
         </div>
 
