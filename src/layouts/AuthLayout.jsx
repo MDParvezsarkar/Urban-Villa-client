@@ -11,12 +11,11 @@ const AuthLayout = () => {
         <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-primary text-primary-content p-6 space-y-6">
           {/* Logo at top */}
           <div className="w-full flex justify-start">
-            <Logo />
+            <Logo color="text-white" />
           </div>
 
           {/* Main content - centered */}
           <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-3xl font-bold">Welcome Back!</h1>
             <Lottie
               animationData={loginAnimation}
               loop
@@ -28,7 +27,7 @@ const AuthLayout = () => {
         {/* Right Side - Login Component */}
         <div className="w-full md:w-1/2 flex items-center justify-center p-8">
           <div className="w-full max-w-md">
-            <DynamicTitle/>
+            <DynamicTitle />
             <Outlet />
           </div>
         </div>
