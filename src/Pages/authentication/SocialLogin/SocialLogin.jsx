@@ -36,7 +36,7 @@ const SocialLogin = () => {
           console.error("❌ Error upserting Google user to DB:", err);
         }
 
-        toast.success("Logged in with Google!");
+        toast.success("Logged in with Google!!");
         navigate(from, { replace: true });
       })
       .catch((error) => {
