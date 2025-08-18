@@ -43,7 +43,7 @@ const Register = () => {
     try {
       const result = await createUser(data.email, data.password);
       const firebaseUser = result.user;
-      console.log(firebaseUser)
+      console.log(firebaseUser);
       // Update Firebase profile
       await updateUserProfile({
         displayName: `${data.firstName} ${data.lastName}`,
@@ -156,7 +156,7 @@ const Register = () => {
 
         <button
           type="submit"
-          className="btn btn-primary w-full mt-2"
+          className="btn btn-[var(--color-brand)] w-full mt-2"
           disabled={uploading}
         >
           {uploading ? "Please wait..." : "Register"}
@@ -168,7 +168,7 @@ const Register = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-primary font-semibold hover:underline"
+            className="text-[var(--color-brand)] font-semibold hover:underline"
           >
             Login
           </Link>

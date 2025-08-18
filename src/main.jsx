@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden bg-[var(--color-brand-lite)]">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <LoadingProvider>

@@ -10,7 +10,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           key={page}
           onClick={() => onPageChange(page)}
           className={`btn btn-sm ${
-            currentPage === page ? "btn-primary" : "btn-outline"
+            currentPage === page ? "btn-[var(--color-brand)]" : "btn-outline"
           }`}
         >
           {page}

@@ -32,7 +32,7 @@ const Coupons = () => {
           className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-16"
           data-aos="fade-down"
         >
-           Special Offers Just for You
+          Special Offers Just for You
         </h2>
         {coupons.length === 0 ? (
           <p className="text-center text-gray-500">
@@ -49,11 +49,11 @@ const Coupons = () => {
                 <div className="flex flex-col items-center text-center">
                   {/* Icon based on index for variety */}
                   {idx % 3 === 0 ? (
-                    <FaGift className="text-5xl text-primary mb-3" />
+                    <FaGift className="text-5xl text-[var(--color-brand)] mb-3" />
                   ) : idx % 3 === 1 ? (
-                    <FaTags className="text-5xl text-primary mb-3" />
+                    <FaTags className="text-5xl text-[var(--color-brand)] mb-3" />
                   ) : (
-                    <FaCoins className="text-5xl text-primary mb-3" />
+                    <FaCoins className="text-5xl text-[var(--color-brand)] mb-3" />
                   )}
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
                     {offer.code} - {offer.discount}% OFF

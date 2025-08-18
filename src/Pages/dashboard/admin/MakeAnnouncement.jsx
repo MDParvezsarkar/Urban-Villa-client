@@ -46,7 +46,7 @@ const MakeAnnouncement = () => {
         </div>
         <button
           type="submit"
-          className="bg-primary text-white px-6 py-2 rounded hover:bg-secondary"
+          className="bg-[var(--color-brand)] text-white px-6 py-2 rounded hover:bg-secondary"
         >
           Submit
         </button>

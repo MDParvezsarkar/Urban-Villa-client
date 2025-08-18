@@ -10,7 +10,7 @@ const RootLayout = () => {
     return (
       <div>
         <Navbar />
-        <div className="min-h-[calc(100vh-277px)]">
+        <div className="min-h-[calc(100vh-277px)] my-20">
           <DynamicTitle/>
           {loading && <MoonLoaderComponent />}
           <Outlet></Outlet>

@@ -25,7 +25,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-// custom icon instead 
+// custom icon instead
 const customIcon = new L.Icon({
   iconUrl: "https://i.ibb.co/0yCB63fG/marker-2.png",
   iconSize: [32, 32],
@@ -34,7 +34,7 @@ const customIcon = new L.Icon({
 });
 
 const Location = () => {
-  const position = [23.8103, 90.4125]; 
+  const position = [23.8103, 90.4125];
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -63,25 +63,27 @@ const Location = () => {
             </p>
             <ul className="mt-4 space-y-3 text-gray-600">
               <li className="flex items-center gap-2">
-                <FaTrain className="text-primary" /> 5 mins from Metro Station
+                <FaTrain className="text-[var(--color-brand)]" /> 5 mins from
+                Metro Station
               </li>
               <li className="flex items-center gap-2">
-                <FaBusAlt className="text-primary" /> Multiple Bus Routes
+                <FaBusAlt className="text-[var(--color-brand)]" /> Multiple Bus
+                Routes
               </li>
               <li className="flex items-center gap-2">
-                <FaHospital className="text-primary" /> Close to hospitals &
-                schools
+                <FaHospital className="text-[var(--color-brand)]" /> Close to
+                hospitals & schools
               </li>
               <li className="flex items-center gap-2">
-                <FaShoppingCart className="text-primary" /> Nearby Shopping
-                Malls
+                <FaShoppingCart className="text-[var(--color-brand)]" /> Nearby
+                Shopping Malls
               </li>
             </ul>
           </div>
 
           {/* Map Section */}
           <div
-            className="rounded-xl overflow-hidden shadow-xl ring-2 ring-secondary hover:ring-primary transition duration-300 h-[300px] md:h-[400px]"
+            className="rounded-xl overflow-hidden shadow-xl ring-2 ring-secondary hover:ring-[var(--color-brand)] transition duration-300 h-[300px] md:h-[400px]"
             data-aos="fade-left"
           >
             <MapContainer

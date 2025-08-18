@@ -8,7 +8,7 @@ import { FaEnvelopeOpenText } from "react-icons/fa";
 const AgreementRequests = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-    const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const fetchRequests = async () => {
     const res = await axios.get(
       `${import.meta.env.VITE_API_URL}/agreements/pending`
@@ -21,25 +21,24 @@ const AgreementRequests = () => {
     fetchRequests();
   }, []);
 
-const handleAccept = async (id, email, name) => {
-  try {
-    const res = await axiosSecure.patch(`/agreements/accept/${id}`, {
-      userEmail: email,
-      userName: name,
-    });
+  const handleAccept = async (id, email, name) => {
+    try {
+      const res = await axiosSecure.patch(`/agreements/accept/${id}`, {
+        userEmail: email,
+        userName: name,
+      });
 
-    if (res.data?.userResult?.modifiedCount > 0) {
-      toast.success(`${name} is now a Member! 🎉`);
-      fetchRequests();
-      
-    } else {
-      toast.error("Failed to promote user.");
+      if (res.data?.userResult?.modifiedCount > 0) {
+        toast.success(`${name} is now a Member! 🎉`);
+        fetchRequests();
+      } else {
+        toast.error("Failed to promote user.");
+      }
+    } catch (err) {
+      toast.error("Something went wrong.");
+      console.error("❌ Promote failed:", err);
     }
-  } catch (err) {
-    toast.error("Something went wrong.");
-    console.error("❌ Promote failed:", err);
-  }
-};
+  };
 
   const handleReject = async (id) => {
     try {
@@ -49,16 +48,14 @@ const handleAccept = async (id, email, name) => {
 
       toast.success("Agreement rejected and removed successfully");
 
-      fetchRequests(); 
+      fetchRequests();
     } catch (err) {
       console.error("❌ Reject failed:", err);
       toast.error("Failed to reject agreement");
     }
   };
 
-
-  if (loading)
-    return <Loader/>;
+  if (loading) return <Loader />;
 
   return (
     <div className="max-w-5xl mx-auto mt-8">
@@ -70,8 +67,8 @@ const handleAccept = async (id, email, name) => {
         <p className="text-gray-600">No pending requests found.</p>
       ) : (
         <div className="overflow-x-auto mt-6">
-          <table className="table w-full min-w-[700px] border border-primary shadow rounded-md">
-            <thead className="bg-primary text-white">
+          <table className="table w-full min-w-[700px] border border-[var(--color-brand)] shadow rounded-md">
+            <thead className="bg-[var(--color-brand)] text-white">
               <tr>
                 <th>Name</th>
                 <th>Email</th>
@@ -107,7 +104,7 @@ const handleAccept = async (id, email, name) => {
                     </button>
                     <button
                       onClick={() => handleReject(req._id)}
-                      className="bg-primary text-white px-2 py-1 rounded"
+                      className="bg-[var(--color-brand)] text-white px-2 py-1 rounded"
                     >
                       Reject
                     </button>

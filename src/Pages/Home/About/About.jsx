@@ -33,10 +33,10 @@ const About = () => {
           className="bg-white/70 backdrop-blur-lg border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
           data-aos="fade-right"
         >
-          <div className="text-primary text-4xl mb-4">
+          <div className="text-[var(--color-brand)] text-4xl mb-4">
             <FaCouch />
           </div>
-          <h4 className="text-xl font-semibold mb-2 text-primary">
+          <h4 className="text-xl font-semibold mb-2 text-[var(--color-brand)]">
             Premium Facilities
           </h4>
           <p className="text-gray-700 text-sm">
@@ -67,10 +67,10 @@ const About = () => {
           className="bg-white/70 backdrop-blur-lg border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
           data-aos="fade-left"
         >
-          <div className="text-primary text-4xl mb-4">
+          <div className="text-[var(--color-brand)] text-4xl mb-4">
             <FaUsers />
           </div>
-          <h4 className="text-xl font-semibold mb-2 text-primary">
+          <h4 className="text-xl font-semibold mb-2 text-[var(--color-brand)]">
             Community Spaces
           </h4>
           <p className="text-gray-700 text-sm">

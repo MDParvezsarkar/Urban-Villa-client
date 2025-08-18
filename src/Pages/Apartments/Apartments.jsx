@@ -36,12 +36,10 @@ const Apartments = () => {
         const res = await axiosSecure.get("/agreements/checked");
         const checked = res.data.filter((a) => a.status === "checked");
         setRentedList(
-          checked.map(
-            (a) => `${a.floor}-${a.block}-${a.apartmentNo}` 
-          )
+          checked.map((a) => `${a.floor}-${a.block}-${a.apartmentNo}`)
         );
       } catch (err) {
-        console.error("Failed to load rented apartments",err);
+        console.error("Failed to load rented apartments", err);
       }
     };
 
@@ -84,7 +82,7 @@ const Apartments = () => {
     try {
       const res = await axiosSecure.post("/agreements", agreementData);
       toast.success("Agreement sent!");
-      console.log(res)
+      console.log(res);
     } catch (error) {
       const msg = error.response?.data?.message || "Something went wrong!";
       toast.error(msg);
@@ -112,7 +110,7 @@ const Apartments = () => {
           onChange={(e) => setMaxRent(e.target.value)}
         />
         <button
-          className="btn btn-primary"
+          className="btn btn-[var(--color-brand)]"
           onClick={() => {
             setPage(1);
             setSearchParams({ min: minRent, max: maxRent });

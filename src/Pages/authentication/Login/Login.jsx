@@ -97,14 +97,17 @@ const Login = () => {
 
         {/* ✅ Forgot Password */}
         <p
-          className="text-sm text-center mt-2 text-primary hover:underline cursor-pointer"
+          className="text-sm text-center mt-2 text-[var(--color-brand)] hover:underline cursor-pointer"
           onClick={handleResetPassword}
         >
           Forgot Password?
         </p>
 
         {/* Submit Button */}
-        <button type="submit" className="btn btn-primary w-full mt-2">
+        <button
+          type="submit"
+          className="btn btn-[var(--color-brand)] w-full mt-2"
+        >
           Login
         </button>
 
@@ -116,7 +119,7 @@ const Login = () => {
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="text-primary font-semibold hover:underline"
+            className="text-[var(--color-brand)] font-semibold hover:underline"
           >
             Register
           </Link>

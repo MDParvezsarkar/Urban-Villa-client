@@ -17,7 +17,7 @@ const ApartmentCard = ({ apartment, onAgree }) => {
         <button
           onClick={() => onAgree(apartment)}
           disabled={isRented}
-          className="btn btn-primary btn-sm"
+          className="btn btn-[var(--color-brand)] btn-sm"
         >
           {isRented ? "Already Rented" : "Make Agreement"}
         </button>

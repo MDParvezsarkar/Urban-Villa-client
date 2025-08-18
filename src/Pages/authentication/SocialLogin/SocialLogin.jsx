@@ -52,7 +52,7 @@ const SocialLogin = () => {
       <button
         type="button"
         onClick={handleGoogleLogin}
-        className="btn btn-outline text-base sm:text-lg btn-primary w-full"
+        className="btn btn-outline text-base sm:text-lg btn-[var(--color-brand)] w-full"
       >
         <FcGoogle className="w-5 h-5 mr-2" />
         Continue with Google

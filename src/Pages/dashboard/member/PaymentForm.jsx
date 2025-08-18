@@ -6,7 +6,6 @@ import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const PaymentForm = ({ agreement }) => {
-
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -51,7 +50,7 @@ const PaymentForm = ({ agreement }) => {
         setFinalRent(agreement.rent);
       }
     } catch (err) {
-      toast.error("Failed to apply coupon",err);
+      toast.error("Failed to apply coupon", err);
     }
   };
 
@@ -100,7 +99,7 @@ const PaymentForm = ({ agreement }) => {
         await axiosSecure.post("/payments", paymentData);
         toast.success("✅ Payment successful!");
       } catch (err) {
-        toast.error("Payment succeeded, but failed to save.",err);
+        toast.error("Payment succeeded, but failed to save.", err);
       }
     }
 
@@ -132,7 +131,9 @@ const PaymentForm = ({ agreement }) => {
       <p>
         <strong>Total Rent:</strong> ${finalRent}{" "}
         {discount > 0 && (
-          <span className="text-primary ml-2">({discount}% off)</span>
+          <span className="text-[var(--color-brand)] ml-2">
+            ({discount}% off)
+          </span>
         )}
       </p>
       <select
@@ -150,7 +151,7 @@ const PaymentForm = ({ agreement }) => {
       </select>
       <button
         type="submit"
-        className="bg-primary text-white px-4 py-2 rounded disabled:opacity-60"
+        className="bg-[var(--color-brand)] text-white px-4 py-2 rounded disabled:opacity-60"
         disabled={!stripe || processing}
       >
         {processing ? "Processing..." : "Pay"}

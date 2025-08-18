@@ -16,14 +16,14 @@ const PaymentHistory = () => {
     },
   });
 
-  if (isLoading) return <MoonLoaderComponent/>;
+  if (isLoading) return <MoonLoaderComponent />;
 
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4"> My Payment History</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
-          <thead className="bg-primary text-white">
+          <thead className="bg-[var(--color-brand)] text-white">
             <tr>
               <th>#</th>
               <th>Month</th>

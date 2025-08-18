@@ -30,7 +30,7 @@ const ManageCoupons = () => {
     try {
       const res = await axiosSecure.post("/coupons", {
         ...data,
-        available: true, 
+        available: true,
       });
       if (res.data.insertedId) {
         toast.success("✅ Coupon added!");
@@ -68,7 +68,6 @@ const ManageCoupons = () => {
     }
   };
 
-
   return (
     <div className="max-w-5xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 flex gap-3 items-center">
@@ -99,7 +98,7 @@ const ManageCoupons = () => {
         ></textarea>
         <button
           type="submit"
-          className="bg-primary text-white py-2 px-4 rounded hover:bg-secondary"
+          className="bg-[var(--color-brand)] text-white py-2 px-4 rounded hover:bg-secondary"
         >
           Add Coupon
         </button>
@@ -110,8 +109,8 @@ const ManageCoupons = () => {
         <Loader />
       ) : (
         <div className="overflow-x-auto mt-6">
-          <table className="table w-full min-w-[700px] border border-primary shadow rounded-md">
-            <thead className="bg-primary text-white">
+          <table className="table w-full min-w-[700px] border border-[var(--color-brand)] shadow rounded-md">
+            <thead className="bg-[var(--color-brand)] text-white">
               <tr>
                 <th className="p-2 border">Code</th>
                 <th className="p-2 border">Discount %</th>

@@ -16,8 +16,8 @@ const DashboardLayout = () => {
 
   const navLinkClass = ({ isActive }) =>
     isActive
-      ? "bg-white text-primary font-semibold px-4 py-2 rounded-md"
-      : "hover:bg-white hover:text-primary px-4 py-2 rounded-md transition";
+      ? "bg-white text-[var(--color-brand)] font-semibold px-4 py-2 rounded-md"
+      : "hover:bg-white hover:text-[var(--color-brand)] px-4 py-2 rounded-md transition";
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
