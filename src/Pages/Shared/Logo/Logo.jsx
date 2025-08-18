@@ -1,4 +1,4 @@
-import { FaBuilding } from "react-icons/fa";
+
 import { Link } from "react-router";
 
 const Logo = ({ color }) => {
@@ -6,10 +6,14 @@ const Logo = ({ color }) => {
   return (
     <Link
       to="/"
-      className={`flex items-center gap-2 text-xl font-bold ${color}`} 
+      className={`flex items-center gap-2 bg-[var(--color-brand-lite)] rounded-full w-20 h-20 justify-center text-xl font-bold ${color}`}
     >
-      <FaBuilding className={color} size={32} />
-      <span className={color}>UrbanVilla</span>
+      <img
+        src="https://i.ibb.co.com/nsLvyRT8/urban-villa-high-resolution-logo-transparent.png"
+        alt="logo"
+        width={60}
+        height={60}
+      />
     </Link>
   );
 };

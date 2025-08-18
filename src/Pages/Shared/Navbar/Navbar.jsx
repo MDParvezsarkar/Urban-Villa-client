@@ -34,6 +34,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", link: "/" },
     { name: "Apartment", link: "/apertment" },
+    { name: "Dashboard", link: "/dashboard" },
   ];
 
   return (
@@ -69,15 +70,15 @@ const Navbar = () => {
                 </div>
 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-md z-50 p-2">
-                    <p className="text-gray-800 font-semibold px-2 mb-2">
+                  <div className="absolute right-0 mt-2 w-48 bg-[var(--color-brand-lite)] border-2 border-[var(--color-brand)] rounded-lg shadow-md z-50 p-2">
+                    <p className="text-[var(--color-brand)] font-semibold px-2 mb-2">
                       {user.displayName}
                     </p>
                     <ul className="space-y-2">
                       <li>
                         <Link
                           to="/dashboard"
-                          className="flex items-center gap-2 hover:text-[var(--color-brand)] px-2"
+                          className="flex items-center w-full gap-2 text-[var(--color-brand)] hover:shadow-lg  px-2"
                         >
                           <MdDashboard />
                           Dashboard
@@ -86,7 +87,7 @@ const Navbar = () => {
                       <li>
                         <button
                           onClick={handleLogout}
-                          className="flex items-center gap-2 text-red-600 hover:text-red-800 px-2"
+                          className="flex items-center w-full gap-2 text-[var(--color-brand)] hover:shadow-lg px-2"
                         >
                           <FaSignOutAlt />
                           Logout

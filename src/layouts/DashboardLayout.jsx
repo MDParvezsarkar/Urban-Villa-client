@@ -22,7 +22,7 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
       {/* Mobile Toggle Button */}
-      <div className="md:hidden flex justify-between items-center bg-gray-800 text-white p-4">
+      <div className="md:hidden flex justify-between items-center bg-[var(--color-brand-lite)] text-[var(--color-brand)] p-4">
         <Logo />
         <button onClick={() => setOpen(!open)} className="text-2xl">
           <FiMenu />
@@ -33,7 +33,7 @@ const DashboardLayout = () => {
       <aside
         className={`${
           open ? "block" : "hidden"
-        } md:block w-full md:w-64 bg-gray-800 text-white p-4 space-y-4`}
+        } md:block w-full md:w-64 bg-[var(--color-brand)] text-[var(--color-brand-lite)] p-4 space-y-4`}
       >
         <div className="hidden md:flex">
           <Logo />
@@ -90,7 +90,7 @@ const DashboardLayout = () => {
       </aside>
 
       {/* Content */}
-      <main className="flex-1 p-4 md:p-6 bg-gray-100">
+      <main className="flex-1 p-4 md:p-6 bg-[var(--color-brand-lite)]">
         <DynamicTitle />
         <Outlet />
       </main>
