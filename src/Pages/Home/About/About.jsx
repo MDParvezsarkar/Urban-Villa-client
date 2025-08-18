@@ -9,16 +9,16 @@ const About = () => {
   }, []);
 
   return (
-    <section className="bg-gradient-to-b from-white to-blue-50 py-20 px-6 md:px-12 lg:px-20">
-      <div className="max-w-5xl mx-auto text-center mb-16">
+    <section className="bg-gradient-to-b from-white to-blue-50 py-20">
+      <div className="max-w-7xl mx-auto text-center mb-16">
         <h2
-          className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4"
+          className="text-4xl md:text-5xl font-extrabold text-[var(--color-brand)] mb-4"
           data-aos="fade-down"
         >
-          Discover <span className="text-secondary">Urban Heights</span>
+          Discover <span className="">Urban Heights</span>
         </h2>
         <p
-          className="text-lg md:text-xl text-gray-600 leading-relaxed"
+          className="text-lg md:text-xl text-[var(--color-brand)] leading-relaxed"
           data-aos="fade-up"
         >
           Urban Heights is not just a building — it's a lifestyle. Our
@@ -27,7 +27,7 @@ const About = () => {
         </p>
       </div>
 
-      <div className="mt-10 grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <div className="mt-10 grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
         {/* Card 1 */}
         <div
           className="bg-white/70 backdrop-blur-lg border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
@@ -50,10 +50,10 @@ const About = () => {
           className="bg-white/70 backdrop-blur-lg border border-gray-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
           data-aos="zoom-in"
         >
-          <div className="text-secondary text-4xl mb-4">
+          <div className="text-[var(--color-brand)] text-4xl mb-4">
             <FaLeaf />
           </div>
-          <h4 className="text-xl font-semibold mb-2 text-secondary">
+          <h4 className="text-xl font-semibold mb-2 text-[var(--color-brand)]">
             Sustainable Design
           </h4>
           <p className="text-gray-700 text-sm">

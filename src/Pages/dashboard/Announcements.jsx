@@ -12,15 +12,24 @@ const Announcements = () => {
   }, []);
 
   return (
-    <div className="max-w-3xl mx-auto mt-6 p-4 bg-white rounded shadow">
-      <h1 className="text-2xl text-secondary font-bold mb-4 flex gap-3 items-center">Announcements <MdOutlineCampaign className="text-4xl"/></h1>
+    <div className="">
+      <h1 className="text-2xl text-[var(--color-brand)] font-bold mb-4 flex gap-3 items-center">
+        Announcements <MdOutlineCampaign className="text-4xl" />
+      </h1>
       <ul className="space-y-3">
-        {announcements.length === 0 && <p>No announcements yet.</p>}
+        {announcements.length === 0 && (
+          <p className="text-[var(--color-brand)]">No announcements yet.</p>
+        )}
         {announcements.map((a, index) => (
-          <li key={index} className="border-l-4 border-secondary pl-4">
-            <h3 className="font-semibold text-lg">{a.title}</h3>
-            <p>{a.description}</p>
-            <p className="text-sm text-gray-500">
+          <li
+            key={index}
+            className="border-l-4 border-[var(--color-brand)] pl-4"
+          >
+            <h3 className="font-semibold text-lg text-[var(--color-brand)]">
+              {a.title}
+            </h3>
+            <p className="text-[var(--color-brand)]">{a.description}</p>
+            <p className="text-sm text-[var(--color-brand-lite)]">
               {new Date(a.createdAt).toLocaleString()}
             </p>
           </li>

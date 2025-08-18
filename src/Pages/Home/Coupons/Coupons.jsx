@@ -26,10 +26,10 @@ const Coupons = () => {
   }, [axiosSecure]);
 
   return (
-    <section className="py-20 px-6 md:px-12 lg:px-20 bg-white">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 px-6">
+      <div className="max-w-7xl mx-auto">
         <h2
-          className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-16"
+          className="text-4xl md:text-5xl font-bold text-center text-[var(--color-brand)] mb-16"
           data-aos="fade-down"
         >
           Special Offers Just for You
@@ -39,7 +39,7 @@ const Coupons = () => {
             No active coupons available.
           </p>
         ) : (
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="flex gap-10">
             {coupons.map((offer, idx) => (
               <div
                 key={offer._id}

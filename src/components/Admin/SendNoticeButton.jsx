@@ -17,9 +17,9 @@ const SendNoticeButton = () => {
   return (
     <button
       onClick={sendNotices}
-      className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+      className="bg-[var(--color-brand)] hover:bg-[var(--color-brand)] text-[var(--color-brand-lite)] py-2 px-4 rounded"
     >
-      🔔 Check Rent & Send Notices
+     Check Rent & Send Notices
     </button>
   );
 };

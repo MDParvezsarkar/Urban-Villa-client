@@ -58,17 +58,17 @@ const AgreementRequests = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="max-w-5xl mx-auto mt-8">
+    <div className="text-[var(--color-brand)]">
       <h2 className="text-2xl font-bold mb-4 flex gap-2 items-center">
         <FaEnvelopeOpenText /> Agreement Requests
       </h2>
 
       {requests.length === 0 ? (
-        <p className="text-gray-600">No pending requests found.</p>
+        <p className="text-[var(--color-brand)]">No pending requests found.</p>
       ) : (
         <div className="overflow-x-auto mt-6">
           <table className="table w-full min-w-[700px] border border-[var(--color-brand)] shadow rounded-md">
-            <thead className="bg-[var(--color-brand)] text-white">
+            <thead className="bg-[var(--color-brand)] text-[var(--color-brand-lite)]">
               <tr>
                 <th>Name</th>
                 <th>Email</th>
@@ -80,11 +80,11 @@ const AgreementRequests = () => {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white text-center">
+            <tbody className="text-[var(--color-brand)] text-center">
               {requests.map((req) => (
                 <tr
                   key={req._id}
-                  className="hover:bg-secondary/10 transition-all duration-300"
+                  className="hover:bg-[var(--color-brand)]/10 hover:text-[var(--color-brand)] transition-all duration-300"
                 >
                   <td>{req.userName}</td>
                   <td>{req.userEmail}</td>
@@ -95,7 +95,7 @@ const AgreementRequests = () => {
                   <td>{new Date(req.date).toLocaleDateString()}</td>
                   <td className="space-x-2">
                     <button
-                      className="bg-secondary text-white px-2 py-1 rounded"
+                      className="bg-[var(--color-brand)] text-[var(--color-brand-lite)] px-2 py-1 rounded"
                       onClick={() =>
                         handleAccept(req._id, req.userEmail, req.userName)
                       }
@@ -104,7 +104,7 @@ const AgreementRequests = () => {
                     </button>
                     <button
                       onClick={() => handleReject(req._id)}
-                      className="bg-[var(--color-brand)] text-white px-2 py-1 rounded"
+                      className="bg-[var(--color-brand)] text-[var(--color-brand-lite)] px-2 py-1 rounded"
                     >
                       Reject
                     </button>

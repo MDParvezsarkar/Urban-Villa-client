@@ -109,7 +109,7 @@ const PaymentForm = ({ agreement }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white p-4 rounded shadow space-y-4"
+      className=" text-[var(--color-brand)] p-4 rounded shadow space-y-4"
     >
       <CardElement />
       <div className="flex gap-2">
@@ -123,7 +123,7 @@ const PaymentForm = ({ agreement }) => {
         <button
           type="button"
           onClick={handleApplyCoupon}
-          className="btn btn-secondary"
+          className="btn bg-[var(--color-brand)] text-[var(--color-brand-lite)]"
         >
           Apply
         </button>
@@ -151,7 +151,7 @@ const PaymentForm = ({ agreement }) => {
       </select>
       <button
         type="submit"
-        className="bg-[var(--color-brand)] text-white px-4 py-2 rounded disabled:opacity-60"
+        className="bg-[var(--color-brand)] text-[var(--color-brand-lite)] px-4 py-2 rounded disabled:opacity-60"
         disabled={!stripe || processing}
       >
         {processing ? "Processing..." : "Pay"}

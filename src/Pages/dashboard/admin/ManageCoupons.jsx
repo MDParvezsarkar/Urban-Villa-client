@@ -69,17 +69,14 @@ const ManageCoupons = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4">
+    <div className="text-[var(--color-brand)]">
       <h1 className="text-2xl font-bold mb-4 flex gap-3 items-center">
         {" "}
         Manage Coupons <FaTags />
       </h1>
 
       {/* Coupon Form */}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white p-6 rounded shadow space-y-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <input
           {...register("code", { required: true })}
           placeholder="Coupon Code"
@@ -98,7 +95,7 @@ const ManageCoupons = () => {
         ></textarea>
         <button
           type="submit"
-          className="bg-[var(--color-brand)] text-white py-2 px-4 rounded hover:bg-secondary"
+          className="bg-[var(--color-brand)] text-[var(--color-brand-lite)] py-2 px-4 rounded hover:shadow-lg"
         >
           Add Coupon
         </button>
@@ -110,7 +107,7 @@ const ManageCoupons = () => {
       ) : (
         <div className="overflow-x-auto mt-6">
           <table className="table w-full min-w-[700px] border border-[var(--color-brand)] shadow rounded-md">
-            <thead className="bg-[var(--color-brand)] text-white">
+            <thead className="bg-[var(--color-brand)] text-[var(--color-brand-lite)]">
               <tr>
                 <th className="p-2 border">Code</th>
                 <th className="p-2 border">Discount %</th>
@@ -118,11 +115,11 @@ const ManageCoupons = () => {
                 <th className="p-2 border">Available</th>
               </tr>
             </thead>
-            <tbody className="bg-white text-center">
+            <tbody className="bg-white text-center ">
               {coupons.map((c) => (
                 <tr
                   key={c._id}
-                  className="hover:bg-secondary/10 transition-all duration-300"
+                  className="hover:bg-[var(--color-brand)]/10 hover:text-[var(--color-brand)] transition-all duration-300"
                 >
                   <td className="p-2 border text-center">{c.code}</td>
                   <td className="p-2 border text-center">{c.discount}</td>
@@ -130,7 +127,7 @@ const ManageCoupons = () => {
                   <td className="p-2 border text-center">
                     <input
                       type="checkbox"
-                      className="toggle toggle-success"
+                      className="toggle text-[var(--color-brand)]"
                       checked={c.available}
                       onChange={() => handleToggle(c._id, c.available)}
                     />

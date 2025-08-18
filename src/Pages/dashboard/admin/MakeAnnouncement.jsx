@@ -21,7 +21,7 @@ const MakeAnnouncement = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow rounded-xl">
+    <div className="text-[var(--color-brand)]">
       <h2 className="text-2xl font-bold mb-4 flex gap-3 items-center">
         <MdCampaign className="text-5xl" /> Make Announcement
       </h2>

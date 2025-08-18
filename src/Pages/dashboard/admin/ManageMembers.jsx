@@ -40,14 +40,14 @@ const ManageMembers = () => {
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-[var(--color-brand)] text-[var(--color-brand-lite)]">
               <th>#</th>
               <th>Name</th>
               <th>Email</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-[var(--color-brand)]">
             {members.map((member, index) => (
               <tr key={member._id}>
                 <td>{index + 1}</td>
@@ -55,7 +55,7 @@ const ManageMembers = () => {
                 <td>{member.email}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-error text-white"
+                    className="btn btn-sm bg-[var(--color-brand)] text-[var(--color-brand-lite)]"
                     onClick={() => handleRemove(member.email)}
                   >
                     Remove Member

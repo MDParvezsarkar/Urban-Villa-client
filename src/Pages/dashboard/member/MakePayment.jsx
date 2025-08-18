@@ -26,9 +26,11 @@ const MakePayment = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Make Payment</h2>
+      <h2 className="text-2xl font-bold mb-4 text-[var(--color-brand)]">
+        Make Payment
+      </h2>
 
-      <div className="bg-white p-4 rounded shadow mb-6">
+      <div className=" bg-[var(--color-brand)] text-[var(--color-brand-lite)] p-4 mb-6">
         <p>
           <strong>Email:</strong> {user.email}
         </p>
@@ -44,7 +46,6 @@ const MakePayment = () => {
         <p>
           <strong>Rent:</strong> ${agreement.rent}
         </p>
-  
       </div>
 
       <Elements stripe={stripePromise}>

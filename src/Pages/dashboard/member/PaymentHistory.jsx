@@ -20,10 +20,13 @@ const PaymentHistory = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4"> My Payment History</h2>
+      <h2 className="text-2xl font-bold mb-4 text-[var(--color-brand)]">
+        {" "}
+        My Payment History
+      </h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
-          <thead className="bg-[var(--color-brand)] text-white">
+          <thead className="bg-[var(--color-brand)] text-[var(--color-brand-lite)]">
             <tr>
               <th>#</th>
               <th>Month</th>
@@ -34,7 +37,7 @@ const PaymentHistory = () => {
               <th>Date</th>
             </tr>
           </thead>
-          <tbody className="bg-white text-center">
+          <tbody className="bg-[var(--color-brand)] text-[var(--color-brand-lite)] text-left">
             {payments.map((payment, index) => (
               <tr
                 key={payment._id}

@@ -41,10 +41,10 @@ const Location = () => {
   }, []);
 
   return (
-    <section className="bg-gradient-to-br from-white via-gray-100 to-blue-50 py-20 px-6 md:px-12 lg:px-20">
-      <div className="max-w-6xl mx-auto">
+    <section className=" py-20 px-6 md:px-12 lg:px-20">
+      <div className="max-w-7xl mx-auto">
         <h2
-          className="text-4xl font-bold text-center mb-8 text-gray-800"
+          className="text-4xl md:text-5xl font-bold text-center mb-8 text-[var(--color-brand)]"
           data-aos="fade-up"
         >
           Our Apartment Location
@@ -53,15 +53,15 @@ const Location = () => {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Info Section */}
           <div data-aos="fade-right">
-            <h3 className="text-2xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
-              <FaMapMarkedAlt className="text-secondary" /> How to Reach Us
+            <h3 className="text-2xl font-semibold mb-4 text-[var(--color-brand)] flex items-center gap-2">
+              <FaMapMarkedAlt /> How to Reach Us
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-[var(--color-brand)] leading-relaxed">
               Located at the heart of the city, our apartments offer easy access
               to transport, schools, hospitals & malls in a green-friendly
               environment.
             </p>
-            <ul className="mt-4 space-y-3 text-gray-600">
+            <ul className="mt-4 space-y-3 text-[var(--color-brand)]">
               <li className="flex items-center gap-2">
                 <FaTrain className="text-[var(--color-brand)]" /> 5 mins from
                 Metro Station
@@ -83,7 +83,7 @@ const Location = () => {
 
           {/* Map Section */}
           <div
-            className="rounded-xl overflow-hidden shadow-xl ring-2 ring-secondary hover:ring-[var(--color-brand)] transition duration-300 h-[300px] md:h-[400px]"
+            className="rounded-xl overflow-hidden shadow-xl ring-2  ring-[var(--color-brand)] transition duration-300 h-[300px] md:h-[400px]"
             data-aos="fade-left"
           >
             <MapContainer
